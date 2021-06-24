@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/andc_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/andc_logo_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ANDCSocials">
         <activity android:name=".LogIn">
@@ -22,9 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-
-            />
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

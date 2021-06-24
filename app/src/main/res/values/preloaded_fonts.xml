@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
-        <item>@font/</item>
         <item>@font/aladin</item>
         <item>@font/audiowide</item>
         <item>@font/bangers</item>
         <item>@font/calligraffitti</item>
         <item>@font/crushed</item>
+        <item>@font/montserrat</item>
+        <item>@font/noto_sans</item>
         <item>@font/raleway_semibold</item>
     </array>
 </resources>

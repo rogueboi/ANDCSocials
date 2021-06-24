@@ -24,4 +24,9 @@
     <style name="AppTheme.RoundedCornerMaterialButton" parent="Widget.AppCompat.Button.Colored">
         <item name="android:background">@drawable/rounded_shape</item>
     </style>
+
+    <style name="LinearLayout.RoundedCorners" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:background">@drawable/rounded_layout_shape</item>
+    </style>
+
 </resources>

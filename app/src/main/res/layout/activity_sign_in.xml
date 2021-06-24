@@ -9,16 +9,30 @@
     android:background="@drawable/gradient_animation"
     android:id="@+id/signInLayout">
 
+    <TextView
+        android:id="@+id/help1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Need Help?"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/andcLogo"
         android:layout_width="69dp"
         android:layout_height="69dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067"
+        app:layout_constraintTop_toBottomOf="@+id/help1"
+        app:layout_constraintVertical_bias="0.018"
         app:srcCompat="@drawable/andc_logo" />
 
     <TextView
@@ -26,26 +40,27 @@
         android:layout_width="wrap_content"
         android:layout_height="37dp"
         android:fontFamily="@font/raleway_semibold"
+        android:gravity="bottom"
         android:text="Welcome to"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/andcLogo"
-        app:layout_constraintVertical_bias="0.012" />
+        app:layout_constraintVertical_bias="0.045" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="52dp"
-        android:fontFamily="@font/aladin"
+        android:fontFamily="@font/montserrat"
         android:text="ANDC Socials!"
-        android:textSize="45sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0.189"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.0" />
@@ -60,9 +75,9 @@
         android:text="Sign In"
         android:textSize="25sp"
         android:textStyle="bold"
+        app:icon="@drawable/login"
         app:iconGravity="textStart"
         app:iconSize="28dp"
-        android:drawableLeft="@drawable/login"
         app:iconTint="@color/colorGradientStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.513"

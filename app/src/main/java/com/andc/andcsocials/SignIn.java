@@ -33,7 +33,7 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),LogIn.class));
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_in);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }
