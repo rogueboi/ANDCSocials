@@ -6,7 +6,7 @@
     <item
         android:drawable="@drawable/andc_logo"
         android:gravity="center"
-        android:height="300dp"
-        android:width="300dp" />
+        android:height="250dp"
+        android:width="250dp" />
 
 </layer-list>

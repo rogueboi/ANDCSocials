@@ -7,7 +7,55 @@
     android:background="@drawable/gradient_animation"
     android:padding="15dp"
     android:id="@+id/logInLayout"
-    tools:context=".LogIn">
+    tools:context=".LogIn"
+    tools:ignore="MissingClass">
+
+    <TextView
+        android:id="@+id/registerRedirect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Not Yet Registered?\nRegister Now..."
+        android:textColor="@color/colorGradientStart"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <ImageView
+        android:id="@+id/andcLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/forgetPassword"
+        app:layout_constraintVertical_bias="0.021"
+        app:srcCompat="@drawable/andc_logo" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_semibold"
+        android:text="Log In"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/login"
+        android:drawableTint="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/andcLogo"
+        app:layout_constraintVertical_bias="0.047" />
 
     <TextView
         android:id="@+id/forgetPassword"
@@ -24,39 +72,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/andcLogo"
-        android:layout_width="69dp"
-        android:layout_height="69dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/forgetPassword"
-        app:layout_constraintVertical_bias="0.021"
-        app:srcCompat="@drawable/andc_logo" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/login"
-        android:drawablePadding="10dp"
-        android:drawableTint="@color/colorGradientStart"
-        android:fontFamily="@font/raleway_semibold"
-        android:text="Log In"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/andcLogo"
-        app:layout_constraintVertical_bias="0.047" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
-        style="@style/LinearLayout.RoundedCorners"
+
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -117,34 +135,48 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/registerRedirect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Not Yet Registered?\nRegister Now..."
-        android:textColor="@color/colorGradientStart"
-        android:textAlignment="center"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="56dp"
+        android:backgroundTint="@color/colorGradientShade1"
+        android:text="Log In"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:icon="@drawable/login"
+        app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Log In"
-        android:textStyle="bold"
-        android:backgroundTint="@color/colorGradientCenter"
-        app:icon="@drawable/login"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.659" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--<EditText
+                android:textColor="#fff"
+                android:textColorHint="#eee"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:hint="Email"
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@drawable/rounded_corner"
+                android:textSize="17sp" />
+            <EditText
+                android:textColor="#fff"
+                android:textColorHint="#eee"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@drawable/rounded_corner"
+                android:textSize="17sp" />
+
+                original
+    -->
