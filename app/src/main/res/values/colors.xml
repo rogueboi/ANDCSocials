@@ -9,10 +9,13 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="colorGradientStart">#2e3c79</color>
-    <color name="colorGradientCenter">#815ba5</color>
-    <color name="colorGradientEnd">#fe8dd3</color>
+    <color name="colorGradientCenter">#fe8dd3</color>
+    <color name="colorGradientEnd">#aa6bb7</color>
+    <color name="colorGradientShade1">#815ba5</color>
+
 </resources>
 
     <!-- 2E3C79 , <color name="colorGradientStart">#913334</color>
         <color name="colorGradientCenter">#9C3C3D</color>
-        <color name="colorGradientEnd">#CC6F70</color>   -->
+        <color name="colorGradientEnd">#CC6F70</color>
+          #fe8dd3-->
