@@ -26,8 +26,8 @@
 
     <ImageView
         android:id="@+id/andcLogo"
-        android:layout_width="69dp"
-        android:layout_height="69dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.0"
@@ -42,9 +42,10 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/login"
         android:drawablePadding="10dp"
-        android:drawableTint="@color/colorGradientStart"
+        android:drawableTint="@color/black"
         android:fontFamily="@font/raleway_semibold"
         android:text="Log In"
+        android:textColor="@color/black"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,6 +58,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         style="@style/LinearLayout.RoundedCorners"
+        android:background="@color/transparent"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -140,15 +142,16 @@
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="56dp"
+        android:backgroundTint="@color/colorGradientStart"
+        android:text="Log In"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:icon="@drawable/login"
+        app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Log In"
-        android:textStyle="bold"
-        android:backgroundTint="@color/colorGradientCenter"
-        app:icon="@drawable/login"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintTop_toBottomOf="@+id/registerRedirect" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
