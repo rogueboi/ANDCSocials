@@ -45,10 +45,11 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/register"
         android:drawablePadding="10dp"
-        android:drawableTint="@color/colorGradientStart"
+        android:drawableTint="@color/white"
         android:fontFamily="@font/raleway_semibold"
         android:text="Register"
         android:textSize="40sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +100,11 @@
             android:hint="E-mail"
             android:textColorHint="@color/white"
             app:startIconDrawable="@drawable/email"
+            app:helperTextTextColor="@color/black"
+            app:helperTextEnabled="true"
             app:startIconTint="@color/white"
+            app:helperText="*Required"
+            app:errorEnabled="true"
             app:hintTextAppearance="@font/noto_sans">
 
             <!--this is the actual edit text which takes the input-->
@@ -128,7 +133,6 @@
         android:text="NEXT"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:backgroundTint="@color/colorGradientCenter"
         app:icon="@drawable/next"
         app:iconTint="@color/white"
         app:layout_constraintTop_toTopOf="parent"

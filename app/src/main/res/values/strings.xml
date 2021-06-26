@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">ANDC Socials</string>
-    
-    <string-array name="courses">
+
+    <!--string-array name="courses">
         <item>B. Sc. (H.) Computer Science</item>
         <item>B. Sc. (H.) Electronics</item>
         <item>B. Sc. (H.) Physics</item>
-    </string-array>
+    </string-array-->
 
 </resources>

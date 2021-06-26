@@ -26,8 +26,8 @@
 
     <ImageView
         android:id="@+id/andcLogo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="69dp"
+        android:layout_height="69dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.0"

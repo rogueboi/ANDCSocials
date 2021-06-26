@@ -26,8 +26,8 @@
 
     <ImageView
         android:id="@+id/andcLogo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="69dp"
+        android:layout_height="69dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.0"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/login"
         android:drawablePadding="10dp"
-        android:drawableTint="@color/black"
+        android:drawableTint="@color/white"
         android:fontFamily="@font/raleway_semibold"
         android:text="Log In"
         android:textColor="@color/black"
@@ -81,6 +81,8 @@
             android:textColorHint="@color/white"
             app:startIconDrawable="@drawable/email"
             app:startIconTint="@color/white"
+            app:helperText="*Required"
+            app:errorEnabled="true"
             app:hintTextAppearance="@font/noto_sans">
 
             <!--this is the actual edit text which takes the input-->
@@ -107,6 +109,8 @@
             android:textColorHint="@color/white"
             app:startIconDrawable="@drawable/password"
             app:startIconTint="@color/white"
+            app:helperText="*Required"
+            app:errorEnabled="true"
             app:hintTextAppearance="@font/noto_sans">
 
             <!--this is the actual edit text which takes the input-->

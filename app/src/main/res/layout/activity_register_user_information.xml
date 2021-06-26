@@ -45,10 +45,11 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/register"
         android:drawablePadding="10dp"
-        android:drawableTint="@color/colorGradientStart"
+        android:drawableTint="@color/white"
         android:fontFamily="@font/raleway_semibold"
         android:text="Register"
         android:textSize="40sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +64,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_semibold"
         android:gravity="bottom"
-        android:text="Enter Name &amp; Phone Number :"
+        android:text="Enter Name &amp; Course/Part :"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -97,6 +98,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Full Name"
+            app:helperText="*Required"
+            app:errorEnabled="true"
             app:startIconDrawable="@drawable/user"
             android:textColorHint="@color/white"
             app:hintTextAppearance="@font/noto_sans">
@@ -121,6 +124,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Course"
+            app:helperText="*Required"
+            app:errorEnabled="true"
             android:layout_marginTop="10dp">
 
             <AutoCompleteTextView
@@ -130,7 +135,8 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/noto_sans"
                 android:inputType="none"
-                android:text="Course" />
+                android:background="@color/transparent"
+                android:text="Select Course" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -146,8 +152,8 @@
         android:text="Register"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:backgroundTint="@color/colorGradientCenter"
-        app:icon="@drawable/next"
+        android:backgroundTint="@color/colorGradientStart"
+        app:icon="@drawable/register"
         app:iconTint="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
