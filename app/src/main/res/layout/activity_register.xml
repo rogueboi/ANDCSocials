@@ -77,6 +77,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         style="@style/LinearLayout.RoundedCorners"
+        android:background="@color/transparent"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -116,17 +117,20 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/nextRegister"
+        android:id="@+id/nextRegisterPassword"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
+        app:backgroundTint="@color/colorGradientStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         android:text="NEXT"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:backgroundTint="@color/colorGradientCenter"
         app:icon="@drawable/next"
+        app:iconTint="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 

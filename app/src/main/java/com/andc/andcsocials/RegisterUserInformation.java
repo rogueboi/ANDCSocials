@@ -14,7 +14,7 @@ public class RegisterUserInformation extends AppCompatActivity {
         setContentView(R.layout.activity_register_user_information);
         getSupportActionBar().hide();
 
-        ConstraintLayout logInLayout = findViewById(R.id.logInLayout);
+        ConstraintLayout logInLayout = findViewById(R.id.registerUserInformationLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(3500);

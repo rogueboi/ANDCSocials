@@ -20,13 +20,13 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         getSupportActionBar().hide();
 
-        ConstraintLayout logInLayout = findViewById(R.id.logInLayout);
+        ConstraintLayout logInLayout = findViewById(R.id.registerLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(3500);
         animationDrawable.start();
 
-        nextRegister= findViewById(R.id.nextRegister);
+        nextRegister= findViewById(R.id.nextRegisterPassword);
         nextRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
