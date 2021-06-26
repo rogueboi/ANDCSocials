@@ -95,7 +95,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="Full Name"
+            app:startIconDrawable="@drawable/user"
             android:textColorHint="@color/white"
             app:hintTextAppearance="@font/noto_sans">
 
@@ -114,23 +115,21 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TextField2"
 
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Confirm Password"
-            android:textColorHint="@color/white"
-            app:hintTextAppearance="@font/noto_sans">
+            android:hint="Course"
+            android:layout_marginTop="10dp">
 
-            <!--this is the actual edit text which takes the input-->
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/confirmPasswordRegister"
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
-                android:focusedByDefault="false"
-                android:inputType="textPassword"
-                android:textColor="@color/white" />
+                android:layout_weight="1"
+                android:fontFamily="@font/noto_sans"
+                android:inputType="none"
+                android:text="Course" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

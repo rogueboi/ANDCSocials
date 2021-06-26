@@ -77,6 +77,8 @@
             android:layout_height="wrap_content"
             android:hint="E-mail"
             android:textColorHint="@color/white"
+            app:startIconDrawable="@drawable/email"
+            app:startIconTint="@color/white"
             app:hintTextAppearance="@font/noto_sans">
 
             <!--this is the actual edit text which takes the input-->
@@ -101,6 +103,8 @@
             android:layout_marginTop="10dp"
             android:hint="Password"
             android:textColorHint="@color/white"
+            app:startIconDrawable="@drawable/password"
+            app:startIconTint="@color/white"
             app:hintTextAppearance="@font/noto_sans">
 
             <!--this is the actual edit text which takes the input-->

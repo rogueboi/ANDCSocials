@@ -97,6 +97,8 @@
             android:layout_height="wrap_content"
             android:hint="E-mail"
             android:textColorHint="@color/white"
+            app:startIconDrawable="@drawable/email"
+            app:startIconTint="@color/white"
             app:hintTextAppearance="@font/noto_sans">
 
             <!--this is the actual edit text which takes the input-->
@@ -114,6 +116,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/nextRegister"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
