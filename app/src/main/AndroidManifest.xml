@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/andc_logo_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ANDCSocials">
+        <activity android:name=".societyMenu"></activity>
         <activity android:name=".LogIn"></activity>
         <activity
             android:name=".SignIn"
