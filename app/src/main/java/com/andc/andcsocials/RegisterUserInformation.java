@@ -20,7 +20,7 @@ public class RegisterUserInformation extends AppCompatActivity {
 
     private TextView goToLogin;
     private TextInputLayout TextField2;
-    private AutoCompleteTextView autoCompleteTextView;
+    private AutoCompleteTextView selectCourse;
 
     ArrayList<String> Courses;
     ArrayAdapter<String> coursesAdapter;
@@ -37,7 +37,7 @@ public class RegisterUserInformation extends AppCompatActivity {
         animationDrawable.start();
 
         TextField2=findViewById(R.id.TextField2);
-        autoCompleteTextView=findViewById(R.id.autoCompleteTextView);
+        selectCourse=findViewById(R.id.selectCourse);
 
         Courses=new ArrayList<>();
         Courses.add("B. Sc. (H.) Computer Science");
@@ -45,8 +45,8 @@ public class RegisterUserInformation extends AppCompatActivity {
         Courses.add("B. Sc. (H.) Physics");
 
         coursesAdapter=new ArrayAdapter<>(getApplicationContext(),R.layout.dropdown_item,Courses);
-        autoCompleteTextView.setAdapter(coursesAdapter);
-        autoCompleteTextView.setThreshold(1);
+        selectCourse.setAdapter(coursesAdapter);
+        selectCourse.setThreshold(1);
 
         goToLogin=findViewById(R.id.goToLogin);
         goToLogin.setOnClickListener(new View.OnClickListener() {
