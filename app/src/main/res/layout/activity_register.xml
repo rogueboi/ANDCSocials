@@ -22,6 +22,10 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
+        android:shadowColor="@color/colorGradientCenter"
+        android:shadowDx="0.0"
+        android:shadowDy="0.0"
+        android:shadowRadius="8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +55,10 @@
         android:textSize="40sp"
         android:textColor="@color/black"
         android:textStyle="bold"
+        android:shadowColor="@color/white"
+        android:shadowDx="0.0"
+        android:shadowDy="0.0"
+        android:shadowRadius="8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.091"
@@ -153,7 +161,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/nextRegisterPassword"
+        android:id="@+id/nextRegisterUserInformation"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         app:backgroundTint="@color/colorGradientStart"

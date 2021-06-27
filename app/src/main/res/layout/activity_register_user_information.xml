@@ -22,6 +22,10 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
+        android:shadowColor="@color/colorGradientCenter"
+        android:shadowDx="0.0"
+        android:shadowDy="0.0"
+        android:shadowRadius="8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +55,10 @@
         android:textSize="40sp"
         android:textColor="@color/black"
         android:textStyle="bold"
+        android:shadowColor="@color/white"
+        android:shadowDx="0.0"
+        android:shadowDy="0.0"
+        android:shadowRadius="8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.091"
@@ -106,7 +114,7 @@
 
             <!--this is the actual edit text which takes the input-->
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordRegister"
+                android:id="@+id/fullNameRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
@@ -124,19 +132,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Course"
+            app:boxStrokeColor="@color/colorGradientEnd"
+            app:hintTextColor="@color/colorGradientEnd"
+            app:hintAnimationEnabled="true"
             app:helperText="*Required"
             app:errorEnabled="true"
             android:layout_marginTop="10dp">
 
             <AutoCompleteTextView
                 android:id="@+id/selectCourse"
+                style="@style/Widget.AppCompat.AutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/transparent"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:fontFamily="@font/noto_sans"
                 android:inputType="none"
-                android:background="@color/transparent"
-                android:focusable="true" />
+                android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,11 +164,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Register"
-        android:textStyle="bold"
+        android:text="NEXT"
         android:textColor="@color/white"
+        android:textStyle="bold"
         android:backgroundTint="@color/colorGradientStart"
-        app:icon="@drawable/register"
+        app:icon="@drawable/next"
         app:iconTint="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />

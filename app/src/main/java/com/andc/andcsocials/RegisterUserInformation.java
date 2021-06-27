@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -19,7 +20,8 @@ import java.util.ArrayList;
 public class RegisterUserInformation extends AppCompatActivity {
 
     private TextView goToLogin;
-    private TextInputLayout TextField2;
+    private TextInputLayout textField1, textField2;
+    private EditText fullNameRegister;
     private AutoCompleteTextView selectCourse;
 
     ArrayList<String> Courses;
@@ -36,13 +38,25 @@ public class RegisterUserInformation extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(3500);
         animationDrawable.start();
 
-        TextField2=findViewById(R.id.TextField2);
+        textField1=findViewById(R.id.TextField1);
+        fullNameRegister=findViewById(R.id.fullNameRegister);
+        textField2=findViewById(R.id.TextField2);
         selectCourse=findViewById(R.id.selectCourse);
 
         Courses=new ArrayList<>();
+        Courses.add("B. Com. (H.)");
+        Courses.add("B. SC. (H.) Bio Medical Sciences");
+        Courses.add("B. Sc. (H.) Botany");
+        Courses.add("B. Sc. (H.) Chemistry");
         Courses.add("B. Sc. (H.) Computer Science");
         Courses.add("B. Sc. (H.) Electronics");
+        Courses.add("B. Sc. (H.) Mathematics");
         Courses.add("B. Sc. (H.) Physics");
+        Courses.add("B. Sc. (H.) Zoology");
+        Courses.add("B. Sc. in Life Sciences");
+        Courses.add("B. Sc. Physical Sciences with Chemistry");
+        Courses.add("B. Sc. Physical Sciences with Computer Science");
+        Courses.add("B. Sc. Physical Sciences with Electronics");
 
         coursesAdapter=new ArrayAdapter<>(getApplicationContext(),R.layout.dropdown_item,Courses);
         selectCourse.setAdapter(coursesAdapter);

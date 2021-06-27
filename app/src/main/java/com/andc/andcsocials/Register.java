@@ -5,10 +5,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,8 +20,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 
-import static com.andc.andcsocials.R.color.colorGradientEnd;
-
 public class Register extends AppCompatActivity {
 
     private TextView goToLogin;
@@ -32,7 +28,6 @@ public class Register extends AppCompatActivity {
     private EditText emailRegister;
     private ExtendedFloatingActionButton nextRegister;
 
-    private int mode=0;
     String RegistrationType = "",email = "";
 
     ArrayList<String> Registrations;
@@ -51,10 +46,13 @@ public class Register extends AppCompatActivity {
 
         textField1=findViewById(R.id.TextField1);
         selectRegisterType =findViewById(R.id.selectRegisterType);
+        textField2=findViewById(R.id.TextField2);
+        emailRegister=findViewById(R.id.emailRegister);
+        nextRegister= findViewById(R.id.nextRegisterUserInformation);
 
         Registrations =new ArrayList<>();
-        Registrations.add("New Student");
-        Registrations.add("New Society");
+        Registrations.add("Student");
+        Registrations.add("Society");
 
         registrationTypeAdapter =new ArrayAdapter<>(getApplicationContext(),R.layout.dropdown_item, Registrations);
         selectRegisterType.setAdapter(registrationTypeAdapter);
@@ -66,11 +64,9 @@ public class Register extends AppCompatActivity {
                 switch(position) {
                     case 0:
                         textField1.setStartIconDrawable(R.drawable.student);
-                        mode=0;
                         break;
                     case 1:
                         textField1.setStartIconDrawable(R.drawable.society);
-                        mode=1;
                         break;
                 }
                 RegistrationType = selectRegisterType.getText().toString();
@@ -89,13 +85,11 @@ public class Register extends AppCompatActivity {
                 finish();
             }
         });
-        textField2=findViewById(R.id.TextField2);
-        emailRegister=findViewById(R.id.emailRegister);
-        nextRegister= findViewById(R.id.nextRegisterPassword);
+
         nextRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intentRegisterInformation=null;
                 if (selectRegisterType.getText().toString().equals("")) {
                     textField1.setError("Select a Registration Type!");
                     return;
@@ -113,11 +107,24 @@ public class Register extends AppCompatActivity {
                     textField2.setError(null);
                 }
 
-                Intent intentRegisterPassword=new Intent(getApplicationContext(),RegisterPassword.class);
-                intentRegisterPassword.putExtra("registrationType",mode);
-                intentRegisterPassword.putExtra("email",email);
-                startActivity(intentRegisterPassword, ActivityOptions.makeSceneTransitionAnimation(Register.this).toBundle());
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                int check=0;
+                switch (RegistrationType) {
+                    case "Student":
+                        intentRegisterInformation = new Intent(getApplicationContext(), RegisterUserInformation.class);
+                        check=1;
+                        break;
+                    case "Society":
+                        intentRegisterInformation = new Intent(getApplicationContext(), RegisterSocietyInformation.class);
+                        check=1;
+                        break;
+                }
+
+                if (check==1) {
+                    intentRegisterInformation.putExtra("registrationType",RegistrationType);
+                    intentRegisterInformation.putExtra("email",email);
+                    startActivity(intentRegisterInformation, ActivityOptions.makeSceneTransitionAnimation(Register.this).toBundle());
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }
             }
         });
     }
