@@ -78,10 +78,10 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         style="@style/LinearLayout.RoundedCorners"
-        android:background="@color/transparent"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/transparent"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="25dp"
@@ -93,19 +93,50 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TextField1"
 
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Register As"
+            app:boxStrokeColor="@color/colorGradientEnd"
+            app:hintTextColor="@color/colorGradientEnd"
+            app:hintAnimationEnabled="true"
+            app:errorEnabled="true"
+            app:helperText="*Required">
+
+            <AutoCompleteTextView
+                android:id="@+id/selectRegisterType"
+                style="@style/Widget.AppCompat.AutoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:fontFamily="@font/noto_sans"
+                android:inputType="none"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TextField2"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:hint="E-mail"
             android:textColorHint="@color/white"
-            app:startIconDrawable="@drawable/email"
-            app:helperTextTextColor="@color/black"
-            app:helperTextEnabled="true"
-            app:startIconTint="@color/white"
-            app:helperText="*Required"
             app:errorEnabled="true"
-            app:hintTextAppearance="@font/noto_sans">
+            app:helperText="*Required"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/black"
+            app:hintTextAppearance="@font/noto_sans"
+            app:startIconDrawable="@drawable/email"
+            app:startIconTint="@color/white">
 
             <!--this is the actual edit text which takes the input-->
             <com.google.android.material.textfield.TextInputEditText

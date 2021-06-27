@@ -12,6 +12,16 @@
     <color name="colorGradientStart">#2e3c79</color>
     <color name="colorGradientCenter">#815ba5</color>
     <color name="colorGradientEnd">#fe8dd3</color>
+
+    <!--color name="text_input_layout_stroke_color">
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:color="?attr/colorPrimary" android:state_focused="true"/>
+            <item android:alpha="0.87" android:color="?attr/colorOnSurface" android:state_hovered="true"/>
+            <item android:alpha="0.12" android:color="?attr/colorOnSurface" android:state_enabled="false"/>
+            <item android:alpha="0.38" android:color="?attr/colorOnSurface"/>
+        </selector>
+    </color-->
+
 </resources>
 
     <!-- 2E3C79 , <color name="colorGradientStart">#913334</color>

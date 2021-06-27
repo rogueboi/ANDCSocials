@@ -4,21 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignIn"
-    android:padding="15dp"
     android:background="@drawable/gradient_animation"
-    android:id="@+id/signInLayout">
+    android:padding="15dp"
+    android:id="@+id/needHelpLayout"
+    tools:context=".NeedHelp">
 
     <TextView
-        android:id="@+id/help1"
+        android:id="@+id/goToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat"
-        android:text="Need Help?"
+        android:text="Already Registered?\nLogin..."
+        android:gravity="right"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
+        android:drawableRight="@drawable/login"
+        android:drawableTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/help1"
+        app:layout_constraintTop_toBottomOf="@+id/goToLogin"
         app:layout_constraintVertical_bias="0.021"
         app:srcCompat="@drawable/andc_logo" />
 
@@ -75,45 +78,37 @@
         android:orientation="vertical"
         android:gravity="center"
         android:layout_marginTop="60dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/signInButton1"
+            android:id="@+id/contactDevelopers"
             style="@style/AppTheme.RoundedCornerMaterialButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/crushed"
-            android:text="Sign In"
+            android:text="Contact Devlopers"
             android:textSize="25sp"
-            android:textStyle="bold"
-            app:icon="@drawable/login"
-            app:iconGravity="start"
-            app:iconSize="28dp"
-            app:iconTint="@color/white" />
+            android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/registerButton1"
+            android:id="@+id/andcWebsite"
             style="@style/AppTheme.RoundedCornerMaterialButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/crushed"
-            android:text="Register"
+            android:text="ANDC Website"
             android:textAlignment="center"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:paddingLeft="20dp"
-            app:icon="@drawable/register"
-            app:iconGravity="start"
-            app:iconSize="28dp"
-            app:iconTint="@color/white" />
+            android:paddingLeft="20dp" />
     </LinearLayout>
 
     <TextView

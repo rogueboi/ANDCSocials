@@ -10,8 +10,7 @@
         android:roundIcon="@mipmap/andc_logo_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ANDCSocials">
-        <activity android:name=".society_menu"></activity>
-        <activity android:name=".RegisterUserInformation" />
+        <activity android:name=".RegisterUserInformation"></activity>
         <activity android:name=".RegisterPassword" />
         <activity android:name=".Register" />
         <activity android:name=".LogIn" />
