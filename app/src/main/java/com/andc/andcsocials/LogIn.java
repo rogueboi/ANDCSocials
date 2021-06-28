@@ -100,12 +100,11 @@ public class LogIn extends AppCompatActivity {
                             if (!user.isEmailVerified()) {
                                     startActivity(new Intent(getApplicationContext(),AuthenticateEmail.class),ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
                                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                    finish();
+
                             }
                             else {
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                finish();
                             }
                         }
                         else {
@@ -113,6 +112,7 @@ public class LogIn extends AppCompatActivity {
                         }
                     }
                 });
+                finish();
             }
         });
     }
