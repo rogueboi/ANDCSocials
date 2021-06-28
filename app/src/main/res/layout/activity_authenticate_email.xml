@@ -133,7 +133,7 @@
         app:srcCompat="@drawable/logout_56" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/nextRegisterUser"
+        android:id="@+id/nextLogIn"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         app:backgroundTint="@color/colorGradientStart"

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.andc.andcsocials">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/andc_logo"
@@ -10,9 +12,13 @@
         android:roundIcon="@mipmap/andc_logo_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ANDCSocials">
-        <activity android:name=".RegisterSocietyInformation"></activity>
+        <activity android:name=".ForgetPassword"></activity>
+        <activity android:name=".RegisterSocietyInformation_1" />
+        <activity android:name=".RegisterUserInformation_1" />
+        <activity android:name=".RegisterSocietyInformation" />
         <activity android:name=".AuthenticateEmail" />
         <activity android:name=".NeedHelp" />
+        <activity android:name=".society_menu" />
         <activity android:name=".RegisterUserInformation" />
         <activity android:name=".RegisterPassword" />
         <activity android:name=".Register" />

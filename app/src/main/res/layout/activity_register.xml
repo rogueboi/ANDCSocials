@@ -85,14 +85,14 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        style="@style/LinearLayout.RoundedCorners"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@color/transparent"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="25dp"
+        android:paddingVertical="25dp"
+        android:paddingHorizontal="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,6 +124,7 @@
                 android:focusableInTouchMode="false"
                 android:fontFamily="@font/noto_sans"
                 android:inputType="none"
+                android:singleLine="true"
                 android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>

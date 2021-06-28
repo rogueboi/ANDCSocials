@@ -26,12 +26,12 @@ public class Register extends AppCompatActivity {
     private TextInputLayout textField1, textField2;
     private AutoCompleteTextView selectRegisterType;
     private EditText emailRegister;
-    private ExtendedFloatingActionButton nextRegister;
+    private ExtendedFloatingActionButton nextRegisterUserInformation;
 
-    String RegistrationType = "",email = "";
+    private String RegistrationType = "",email = "";
 
-    ArrayList<String> Registrations;
-    ArrayAdapter<String> registrationTypeAdapter;
+    private ArrayList<String> Registrations;
+    private ArrayAdapter<String> registrationTypeAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +48,7 @@ public class Register extends AppCompatActivity {
         selectRegisterType =findViewById(R.id.selectRegisterType);
         textField2=findViewById(R.id.TextField2);
         emailRegister=findViewById(R.id.emailRegister);
-        nextRegister= findViewById(R.id.nextRegisterUserInformation);
+        nextRegisterUserInformation= findViewById(R.id.nextRegisterUserInformation);
 
         Registrations =new ArrayList<>();
         Registrations.add("Student");
@@ -72,7 +72,6 @@ public class Register extends AppCompatActivity {
                 RegistrationType = selectRegisterType.getText().toString();
                 Toast.makeText(Register.this, "You are Registering as a "+RegistrationType+".", Toast.LENGTH_SHORT).show();
                 textField1.setError(null);
-                textField1.setHelperText(null);
             }
         });
 
@@ -86,10 +85,9 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        nextRegister.setOnClickListener(new View.OnClickListener() {
+        nextRegisterUserInformation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentRegisterInformation=null;
                 if (selectRegisterType.getText().toString().equals("")) {
                     textField1.setError("Select a Registration Type!");
                     return;
@@ -107,24 +105,15 @@ public class Register extends AppCompatActivity {
                     textField2.setError(null);
                 }
 
-                int check=0;
-                switch (RegistrationType) {
-                    case "Student":
-                        intentRegisterInformation = new Intent(getApplicationContext(), RegisterUserInformation.class);
-                        check=1;
-                        break;
-                    case "Society":
+                Intent intentRegisterInformation = new Intent(getApplicationContext(), RegisterUserInformation.class);
+                if (RegistrationType.equals("Society")) {
                         intentRegisterInformation = new Intent(getApplicationContext(), RegisterSocietyInformation.class);
-                        check=1;
-                        break;
                 }
 
-                if (check==1) {
-                    intentRegisterInformation.putExtra("registrationType",RegistrationType);
-                    intentRegisterInformation.putExtra("email",email);
-                    startActivity(intentRegisterInformation, ActivityOptions.makeSceneTransitionAnimation(Register.this).toBundle());
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                }
+                intentRegisterInformation.putExtra("registrationType",RegistrationType);
+                intentRegisterInformation.putExtra("email",email);
+                startActivity(intentRegisterInformation, ActivityOptions.makeSceneTransitionAnimation(Register.this).toBundle());
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }

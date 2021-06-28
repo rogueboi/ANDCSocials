@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_animation"
     android:padding="15dp"
-    android:id="@+id/registerPasswordLayout"
-    tools:context=".RegisterPassword">
+    android:id="@+id/registerUserInformationLayout1"
+    tools:context=".RegisterUserInformation_1">
 
     <TextView
         android:id="@+id/goToLogin"
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/register"
         android:drawablePadding="10dp"
-        android:drawableTint="@color/colorGradientStart"
+        android:drawableTint="@color/white"
         android:fontFamily="@font/raleway_semibold"
         android:text="Register"
         android:textSize="40sp"
@@ -67,21 +67,21 @@
         app:layout_constraintVertical_bias="0.047" />
 
     <TextView
-        android:id="@+id/passwordText"
+        android:id="@+id/userInfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_semibold"
         android:gravity="bottom"
-        android:text="Enter Password :"
+        android:text="Enter Phone Number :"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintVertical_bias="0.041" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -97,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordText">
+        app:layout_constraintTop_toBottomOf="@+id/userInfoText">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TextField1"
@@ -106,50 +106,21 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="Full Name"
             app:helperText="*Required"
             app:errorEnabled="true"
-            app:startIconDrawable="@drawable/password"
-            app:startIconTint="@color/white"
+            app:startIconDrawable="@drawable/phone"
             android:textColorHint="@color/white"
             app:hintTextAppearance="@font/noto_sans">
 
             <!--this is the actual edit text which takes the input-->
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordRegister"
+                android:id="@+id/phoneNumberRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
                 android:focusedByDefault="false"
-                android:inputType="textPassword"
-                android:textColor="@color/white" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/TextField2"
-
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Confirm Password"
-            app:helperText="*Required"
-            app:errorEnabled="true"
-            android:textColorHint="@color/white"
-            app:startIconDrawable="@drawable/password"
-            app:startIconTint="@color/white"
-            app:hintTextAppearance="@font/noto_sans">
-
-            <!--this is the actual edit text which takes the input-->
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/confirmPasswordRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
-                android:focusedByDefault="false"
-                android:inputType="textPassword"
+                android:inputType="phone"
                 android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -157,18 +128,18 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/nextAuthenicateEmail"
+        android:id="@+id/nextRegisterPassword"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Register"
-        android:textStyle="bold"
+        android:text="Skip"
         android:textColor="@color/white"
+        android:textStyle="bold"
         android:backgroundTint="@color/colorGradientStart"
-        app:icon="@drawable/register"
+        app:icon="@drawable/next"
         app:iconTint="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />

@@ -11,12 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Objects;
 
 public class SignIn extends AppCompatActivity {
 
     private TextView needHelp;
     private Button signinButton1, registerButton1;
+
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +35,21 @@ public class SignIn extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(3500);
         animationDrawable.start();
+
+        firebaseAuth=FirebaseAuth.getInstance();
+        user=firebaseAuth.getCurrentUser();
+        if (firebaseAuth.getCurrentUser()!=null) {
+            if (!user.isEmailVerified()) {
+                startActivity(new Intent(getApplicationContext(),AuthenticateEmail.class),ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+            }
+            else {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+            }
+        }
 
         needHelp=findViewById(R.id.help1);
         needHelp.setOnClickListener(new View.OnClickListener() {

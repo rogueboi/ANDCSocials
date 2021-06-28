@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.ANDCSocials" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorGradientEnd</item>
+        <item name="colorPrimary">@color/colorGradientStart</item>
         <item name="colorPrimaryVariant">@color/colorGradientCenter</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/colorGradientEnd</item>
@@ -13,6 +13,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorGradientCenter</item>
         <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/ThemeActionBar</item>
+        <item name="actionBarSize">62dp</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/ThemeActionBar</item>
+        <item name="windowActionBarOverlay">true</item>
         <!--item name="textInputStyle">@style/Widget.App.ExposedDropdownMenu</item-->
     </style>
 
@@ -28,6 +34,16 @@
 
     <style name="LinearLayout.RoundedCorners" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:background">@drawable/rounded_layout_shape</item>
+    </style>
+
+    <style name="ThemeActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="android:bottomLeftRadius">5dp</item>
+        <item name="android:bottomRightRadius">5dp</item>
+        <item name="android:titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <!-- Support library compatibility -->
+        <item name="background">@drawable/line_divider</item>
     </style>
 
     <!--style name="Widget.App.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">

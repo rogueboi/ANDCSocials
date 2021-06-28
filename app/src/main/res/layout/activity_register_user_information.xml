@@ -85,14 +85,14 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        style="@style/LinearLayout.RoundedCorners"
         android:background="@color/transparent"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="25dp"
+        android:paddingVertical="25dp"
+        android:paddingHorizontal="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
                 android:focusedByDefault="false"
-                android:inputType="textPassword"
+                android:inputType="textPersonName"
                 android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -128,7 +128,6 @@
             android:id="@+id/TextField2"
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Course"
@@ -136,6 +135,7 @@
             app:hintTextColor="@color/colorGradientEnd"
             app:hintAnimationEnabled="true"
             app:helperText="*Required"
+            app:startIconDrawable="@drawable/course"
             app:errorEnabled="true"
             android:layout_marginTop="10dp">
 
@@ -151,6 +151,7 @@
                 android:focusableInTouchMode="false"
                 android:fontFamily="@font/noto_sans"
                 android:inputType="none"
+                android:singleLine="true"
                 android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -158,6 +159,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/nextRegisterUserInformation1"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         app:layout_constraintBottom_toBottomOf="parent"

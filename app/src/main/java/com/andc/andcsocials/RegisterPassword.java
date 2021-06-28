@@ -37,10 +37,11 @@ public class RegisterPassword extends AppCompatActivity {
     private TextInputLayout textField1, textField2;
     private EditText passwordRegister, confirmPasswordRegister;
     private ExtendedFloatingActionButton nextAuthenticateEmail;
-    String registrationType, email, password, confirmPassword, userID;
+    private String registrationType="", email="", password="", confirmPassword="", fullName="", course="", phoneNumber=" ", societyName="", societyType="", department="", userID="";
 
-    FirebaseAuth firebaseAuth;
-    FirebaseFirestore firestore;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+    private FirebaseFirestore firestore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +54,23 @@ public class RegisterPassword extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(3500);
         animationDrawable.start();
 
-        Intent RegisterIntent=getIntent();
-        registrationType =RegisterIntent.getStringExtra("registrationType");
-        email = RegisterIntent.getStringExtra("email");
+        Intent RegisterInformationIntent=getIntent();
+        registrationType =RegisterInformationIntent.getStringExtra("registrationType");
+        email = RegisterInformationIntent.getStringExtra("email");
+        phoneNumber = RegisterInformationIntent.getStringExtra("phoneNumber");
+
+        if (registrationType.equals("Student")) {
+            fullName = RegisterInformationIntent.getStringExtra("fullName");
+            course = RegisterInformationIntent.getStringExtra("course");
+        }
+        else {
+            societyName=RegisterInformationIntent.getStringExtra("societyName");
+            societyType=RegisterInformationIntent.getStringExtra("societyType");
+            department=RegisterInformationIntent.getStringExtra("department");
+            if (department.equals("")) {
+                department="none";
+            }
+        }
 
         goToLogin=findViewById(R.id.goToLogin);
         textField1=findViewById(R.id.TextField1);
@@ -95,9 +110,23 @@ public class RegisterPassword extends AppCompatActivity {
                 firebaseAuth.createUserWithEmailAndPassword(email,password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
-                            public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                            public void onComplete(@NonNull @org.jetbrains.annotations.NotNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    userID= Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
+                                    user=FirebaseAuth.getInstance().getCurrentUser();
+                                    user.sendEmailVerification()
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Toast.makeText(RegisterPassword.this, "Verification mail has been sent to your email!", Toast.LENGTH_LONG).show();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull @NotNull Exception e) {
+                                                    Toast.makeText(RegisterPassword.this, "Fail to send the verification mail!\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+
+                                    userID= FirebaseAuth.getInstance().getCurrentUser().getUid();
                                     DocumentReference documentReference=firestore.collection("Users")
                                             .document(userID);
                                     Map<String, Object> mapUser=new HashMap<>();
@@ -115,38 +144,56 @@ public class RegisterPassword extends AppCompatActivity {
                                         }
                                     });
 
-                                    DocumentReference documentReferenceRegistrationType=firestore.collection(registrationType)
-                                            .document(userID);
-                                    Map<String, Object> mapUserRegistration=new HashMap<>();
-                                    mapUserRegistration.put("Registration Type",registrationType);
-                                    mapUserRegistration.put("Email",email);
-                                    documentReference.set(mapUserRegistration);
-
-                                    FirebaseUser user=firebaseAuth.getCurrentUser();
-                                    user.sendEmailVerification()
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    Toast.makeText(RegisterPassword.this, "Verification mail has been sent to your email!", Toast.LENGTH_LONG).show();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull @NotNull Exception e) {
-                                            Toast.makeText(RegisterPassword.this, "Fail to send the verification mail!\n"+e.getMessage(), Toast.LENGTH_LONG).show();
-                                        };
-                                    });
+                                    DocumentReference documentReferenceRegistrationType;
+                                    if (registrationType.equals("Society")) {
+                                        documentReferenceRegistrationType = firestore.collection("Society")
+                                                .document(societyType)
+                                                .collection("SocietyID")
+                                                .document(userID);
+                                        Map<String, Object> mapSocietyRegistration = new HashMap<>();
+                                        mapSocietyRegistration.put("Registration Type", registrationType);
+                                        mapSocietyRegistration.put("Email", email);
+                                        mapSocietyRegistration.put("Society Name",societyName);
+                                        mapSocietyRegistration.put("Society Type",societyType);
+                                        mapSocietyRegistration.put("Department",department);
+                                        mapSocietyRegistration.put("Phone Number",phoneNumber);
+                                        mapSocietyRegistration.put("Official Account",false);
+                                        documentReferenceRegistrationType.set(mapSocietyRegistration)
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull @NotNull Exception e) {
+                                                        Toast.makeText(RegisterPassword.this, "Fail to add Society Information in the Database!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    }
+                                    else if (registrationType.equals("Student")) {
+                                        documentReferenceRegistrationType = firestore.collection("Users")
+                                                .document(userID);
+                                        Map<String, Object> mapUserRegistration = new HashMap<>();
+                                        mapUserRegistration.put("Registration Type", registrationType);
+                                        mapUserRegistration.put("Email", email);
+                                        mapUserRegistration.put("Full Name",fullName);
+                                        mapUserRegistration.put("Course",course);
+                                        mapUserRegistration.put("Phone Number",phoneNumber);
+                                        mapUserRegistration.put("Student Coordinator of","none");
+                                        documentReferenceRegistrationType.update(mapUserRegistration)
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull @NotNull Exception e) {
+                                                        Toast.makeText(RegisterPassword.this, "Fail to add Student Information in the Database!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    }
 
                                     startActivity(new Intent(getApplicationContext(),AuthenticateEmail.class), ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
                                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                     finish();
                                 }
+                                else {
+                                    Toast.makeText(RegisterPassword.this, "Error Occurred!!\n"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-                        Toast.makeText(RegisterPassword.this, "Fail to create account!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        });
             }
         });
     }

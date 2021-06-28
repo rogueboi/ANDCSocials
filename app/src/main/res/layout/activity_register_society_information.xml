@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_semibold"
         android:gravity="bottom"
-        android:text="Enter Society Name &amp; Type :"
+        android:text="Enter Society Name &amp; Contact :"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -87,12 +87,13 @@
         android:id="@+id/linearLayout"
         style="@style/LinearLayout.RoundedCorners"
         android:background="@color/transparent"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="25dp"
+        android:paddingVertical="25dp"
+        android:paddingHorizontal="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +106,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Full Name"
+            android:hint="Society Name"
             app:helperText="*Required"
             app:errorEnabled="true"
             app:startIconDrawable="@drawable/user"
@@ -114,12 +115,12 @@
 
             <!--this is the actual edit text which takes the input-->
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordRegister"
+                android:id="@+id/societyNameRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
                 android:focusedByDefault="false"
-                android:inputType="textPassword"
+                android:inputType="textPersonName"
                 android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -127,30 +128,26 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TextField2"
 
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Society Type"
-            app:boxStrokeColor="@color/colorGradientEnd"
-            app:hintTextColor="@color/colorGradientEnd"
-            app:hintAnimationEnabled="true"
+            android:hint="Phone Number"
             app:helperText="*Required"
             app:errorEnabled="true"
+            app:startIconDrawable="@drawable/phone"
+            android:textColorHint="@color/white"
+            app:hintTextAppearance="@font/noto_sans"
             android:layout_marginTop="10dp">
 
-            <AutoCompleteTextView
-                android:id="@+id/selectSocietyType"
-                style="@style/Widget.AppCompat.AutoCompleteTextView"
+            <!--this is the actual edit text which takes the input-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneNumberRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/transparent"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:fontFamily="@font/noto_sans"
-                android:inputType="none"
+                android:focusableInTouchMode="true"
+                android:focusedByDefault="false"
+                android:inputType="phone"
                 android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -158,6 +155,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/nextRegisterSocietyInformation1"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
