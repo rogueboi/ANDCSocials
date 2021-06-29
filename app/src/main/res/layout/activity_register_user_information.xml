@@ -92,7 +92,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingVertical="25dp"
-        android:paddingHorizontal="30dp"
+        android:paddingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,11 +106,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Full Name"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
             app:helperText="*Required"
             app:errorEnabled="true"
             app:startIconDrawable="@drawable/user"
-            android:textColorHint="@color/white"
-            app:hintTextAppearance="@font/noto_sans">
+            app:startIconTint="@color/white"
+            android:textColorHint="@color/white">
 
             <!--this is the actual edit text which takes the input-->
             <com.google.android.material.textfield.TextInputEditText
@@ -120,7 +121,8 @@
                 android:focusableInTouchMode="true"
                 android:focusedByDefault="false"
                 android:inputType="textPersonName"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,17 +133,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Course"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
             app:boxStrokeColor="@color/colorGradientEnd"
-            app:hintTextColor="@color/colorGradientEnd"
+            android:textColorHint="@color/white"
             app:hintAnimationEnabled="true"
             app:helperText="*Required"
             app:startIconDrawable="@drawable/course"
+            app:startIconTint="@color/white"
             app:errorEnabled="true"
             android:layout_marginTop="10dp">
 
             <AutoCompleteTextView
                 android:id="@+id/selectCourse"
-                style="@style/Widget.AppCompat.AutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -152,7 +155,8 @@
                 android:fontFamily="@font/noto_sans"
                 android:inputType="none"
                 android:singleLine="true"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

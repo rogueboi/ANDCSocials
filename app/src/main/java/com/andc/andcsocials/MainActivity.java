@@ -22,18 +22,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_toolbar);
 
         logout=getSupportActionBar().getCustomView().findViewById(R.id.logout);
         logout.setClickable(true);
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(),SignIn.class), ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
+                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(startLogIn, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
+                MainActivity.this.finishAffinity();
             }
         });
     }

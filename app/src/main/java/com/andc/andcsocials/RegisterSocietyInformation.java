@@ -56,9 +56,11 @@ public class RegisterSocietyInformation extends AppCompatActivity {
         goToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),LogIn.class), ActivityOptions.makeSceneTransitionAnimation(RegisterSocietyInformation.this).toBundle());
+                Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
+                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(startLogIn, ActivityOptions.makeSceneTransitionAnimation(RegisterSocietyInformation.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
+                RegisterSocietyInformation.this.finishAffinity();
             }
         });
 

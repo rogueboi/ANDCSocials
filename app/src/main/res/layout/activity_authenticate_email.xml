@@ -11,7 +11,7 @@
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/logoutAuthenticateEmail"
-        android:layout_width="136dp"
+        android:layout_width="wrap_content"
         android:layout_height="35dp"
         app:icon="@drawable/logout"
         app:iconTint="@color/white"

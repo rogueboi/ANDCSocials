@@ -49,9 +49,11 @@ public class AuthenticateEmail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(),LogIn.class),ActivityOptions.makeSceneTransitionAnimation(AuthenticateEmail.this).toBundle());
+                Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
+                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(startLogIn,ActivityOptions.makeSceneTransitionAnimation(AuthenticateEmail.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
+                AuthenticateEmail.this.finishAffinity();
             }
         });
 
@@ -99,9 +101,11 @@ public class AuthenticateEmail extends AppCompatActivity {
                             Toast.makeText(AuthenticateEmail.this, "Your email is not verified!!", Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(AuthenticateEmail.this).toBundle());
+                            Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
+                            startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(AuthenticateEmail.this).toBundle());
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                            finish();
+                            AuthenticateEmail.this.finishAffinity();
                         }
                     }
                 });

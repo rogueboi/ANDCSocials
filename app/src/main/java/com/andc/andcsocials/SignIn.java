@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -23,6 +24,7 @@ public class SignIn extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,18 +40,28 @@ public class SignIn extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         user=firebaseAuth.getCurrentUser();
-        if (firebaseAuth.getCurrentUser()!=null) {
-            if (!user.isEmailVerified()) {
-                startActivity(new Intent(getApplicationContext(),AuthenticateEmail.class),ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
-            else {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
+        if (user!=null) {
+            firebaseAuth.getCurrentUser().reload()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            user=firebaseAuth.getCurrentUser();
+                            if (!user.isEmailVerified()) {
+                                Intent startAuthenticateEmail=new Intent(getApplicationContext(),AuthenticateEmail.class);
+                                startAuthenticateEmail.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(startAuthenticateEmail,ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                SignIn.this.finishAffinity();
+                            }
+                            Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
+                            startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            SignIn.this.finishAffinity();
+                        }
+                    });
         }
+
 
         needHelp=findViewById(R.id.help1);
         needHelp.setOnClickListener(new View.OnClickListener() {

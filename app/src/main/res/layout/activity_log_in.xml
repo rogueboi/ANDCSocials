@@ -73,7 +73,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingVertical="25dp"
-        android:paddingHorizontal="30dp"
+        android:paddingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,12 +87,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="E-mail"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
             android:textColorHint="@color/white"
             app:startIconDrawable="@drawable/email"
             app:startIconTint="@color/white"
             app:helperText="*Required"
-            app:errorEnabled="true"
-            app:hintTextAppearance="@font/noto_sans">
+            app:errorEnabled="true">
 
             <!--this is the actual edit text which takes the input-->
             <com.google.android.material.textfield.TextInputEditText
@@ -102,7 +102,8 @@
                 android:focusableInTouchMode="true"
                 android:focusedByDefault="false"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,12 +116,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:hint="Password"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
             android:textColorHint="@color/white"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorGradientStart"
+            app:passwordToggleDrawable="@drawable/view_password"
             app:startIconDrawable="@drawable/password"
             app:startIconTint="@color/white"
             app:helperText="*Required"
-            app:errorEnabled="true"
-            app:hintTextAppearance="@font/noto_sans">
+            app:errorEnabled="true">
 
             <!--this is the actual edit text which takes the input-->
             <com.google.android.material.textfield.TextInputEditText
@@ -130,7 +134,8 @@
                 android:focusableInTouchMode="true"
                 android:focusedByDefault="false"
                 android:inputType="textPassword"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

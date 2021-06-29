@@ -92,7 +92,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingVertical="25dp"
-        android:paddingHorizontal="30dp"
+        android:paddingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,30 +102,31 @@
             android:id="@+id/TextField1"
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Register As"
-            app:boxStrokeColor="@color/colorGradientEnd"
-            app:hintTextColor="@color/colorGradientEnd"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
+            android:textColorHint="@color/white"
             app:hintAnimationEnabled="true"
             app:errorEnabled="true"
-            app:helperText="*Required">
+            app:helperText="*Required"
+            android:focusedByDefault="false"
+            app:startIconTint="@color/white">
 
             <AutoCompleteTextView
                 android:id="@+id/selectRegisterType"
-                style="@style/Widget.AppCompat.AutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/transparent"
+                android:background="@drawable/text_input_layout_outline"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:fontFamily="@font/noto_sans"
                 android:inputType="none"
                 android:singleLine="true"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,12 +139,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:hint="E-mail"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
             android:textColorHint="@color/white"
             app:errorEnabled="true"
             app:helperText="*Required"
             app:helperTextEnabled="true"
+            android:focusedByDefault="false"
             app:helperTextTextColor="@color/black"
-            app:hintTextAppearance="@font/noto_sans"
             app:startIconDrawable="@drawable/email"
             app:startIconTint="@color/white">
 
@@ -152,6 +154,7 @@
                 android:id="@+id/emailRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:focusableInTouchMode="true"
                 android:focusedByDefault="false"
                 android:inputType="textEmailAddress"

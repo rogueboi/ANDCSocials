@@ -3,10 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/dropDownItemEntity"
-    android:padding="10dp"
-    android:textColor="@color/colorGradientStart"
+    android:text="Hello"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="10dp"
+    android:textColor="@color/colorGradientCenter"
     android:textStyle="bold"
     android:textSize="15sp"
-    android:defaultFocusHighlightEnabled="true">
+    android:fontFamily="@font/noto_sans"
+    android:defaultFocusHighlightEnabled="true"
+    android:background="@drawable/dropdown_item_background">
 
 </TextView>

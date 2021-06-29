@@ -85,9 +85,11 @@ public class RegisterPassword extends AppCompatActivity {
         goToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), LogIn.class), ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
+                Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
+                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(startLogIn, ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
+                RegisterPassword.this.finishAffinity();
             }
         });
 
@@ -185,9 +187,11 @@ public class RegisterPassword extends AppCompatActivity {
                                                 });
                                     }
 
-                                    startActivity(new Intent(getApplicationContext(),AuthenticateEmail.class), ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
+                                    Intent goToAuthenticateEmail=new Intent(getApplicationContext(),AuthenticateEmail.class);
+                                    goToAuthenticateEmail.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(goToAuthenticateEmail, ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
                                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                    finish();
+                                    RegisterPassword.this.finishAffinity();
                                 }
                                 else {
                                     Toast.makeText(RegisterPassword.this, "Error Occurred!!\n"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
@@ -58,7 +59,8 @@ public class LogIn extends AppCompatActivity {
         registerRedirect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Register.class), ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
+                Intent startRegister=new Intent(getApplicationContext(),Register.class);
+                startActivity(startRegister, ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
@@ -66,7 +68,8 @@ public class LogIn extends AppCompatActivity {
         forgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),ForgetPassword.class), ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
+                Intent startForgetPassword=new Intent(getApplicationContext(),ForgetPassword.class);
+                startActivity(startForgetPassword, ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
@@ -96,23 +99,30 @@ public class LogIn extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            user=firebaseAuth.getCurrentUser();
-                            if (!user.isEmailVerified()) {
-                                    startActivity(new Intent(getApplicationContext(),AuthenticateEmail.class),ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
+                            firebaseAuth.getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    user=firebaseAuth.getCurrentUser();
+                                    if (!user.isEmailVerified()) {
+                                        Intent startAuthenticateEmail=new Intent(getApplicationContext(),AuthenticateEmail.class);
+                                        startAuthenticateEmail.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(startAuthenticateEmail,ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
+                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                        LogIn.this.finishAffinity();
+                                    }
+                                    Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
+                                    startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
                                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-                            }
-                            else {
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
-                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                            }
+                                    LogIn.this.finishAffinity();
+                                }
+                            });
                         }
                         else {
-                            Toast.makeText(LogIn.this, "Error Occurred!!\n"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Error Occurred!!\n"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-                finish();
             }
         });
     }
