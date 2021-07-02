@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.slider.Slider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -19,7 +20,7 @@ import java.util.Objects;
 public class SignIn extends AppCompatActivity {
 
     private TextView needHelp;
-    private Button signinButton1, registerButton1;
+    private Button signinButton1, registerButton1 , testButn;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
@@ -62,6 +63,16 @@ public class SignIn extends AppCompatActivity {
 
         signinButton1=findViewById(R.id.signInButton1);
         registerButton1=findViewById(R.id.registerButton1);
+        testButn= findViewById(R.id.testButton);
+
+        testButn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), imageslider.class));
+
+
+            }
+        });
 
         signinButton1.setOnClickListener(new View.OnClickListener() {
             @Override

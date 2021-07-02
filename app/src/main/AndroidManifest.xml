@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/andc_logo_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ANDCSocials">
-        <activity android:name=".ViewPagerExample"></activity>
+        <activity android:name=".imageslider"></activity>
+        <activity android:name=".ViewPagerExample" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".RegisterSocietyInformation_1" />
         <activity android:name=".RegisterUserInformation_1" />
