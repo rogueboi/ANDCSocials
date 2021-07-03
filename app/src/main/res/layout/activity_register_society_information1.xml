@@ -108,12 +108,14 @@
             android:layout_height="wrap_content"
             android:hint="Society Type"
             app:boxStrokeColor="@color/colorGradientEnd"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/white_translucent"
             app:hintAnimationEnabled="true"
             app:hintTextAppearance="@style/TextInputLayoutHintText"
             app:startIconDrawable="@drawable/society_type"
             app:startIconTint="@color/white"
             app:helperText="*Required"
+            app:endIconTint="@color/white"
+            app:helperTextTextColor="@color/white"
             app:errorEnabled="true">
 
             <AutoCompleteTextView
@@ -121,7 +123,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/transparent"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -142,22 +143,23 @@
             android:layout_height="wrap_content"
             android:hint="Society Department"
             app:boxStrokeColor="@color/colorGradientEnd"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/white_translucent"
             app:hintTextAppearance="@style/TextInputLayoutHintText"
             app:hintAnimationEnabled="true"
             app:helperText="*Required"
+            app:helperTextTextColor="@color/white"
             android:visibility="gone"
             app:startIconDrawable="@drawable/student"
             app:startIconTint="@color/white"
+            app:endIconTint="@color/white"
             app:errorEnabled="true"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="20dp">
 
             <AutoCompleteTextView
                 android:id="@+id/selectDepartment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/transparent"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
@@ -165,7 +167,7 @@
                 android:inputType="none"
                 android:singleLine="true"
                 android:textColor="@color/white"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

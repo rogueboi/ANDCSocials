@@ -82,16 +82,13 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TextField1"
 
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="E-mail"
-            app:hintTextAppearance="@style/TextInputLayoutHintText"
-            android:textColorHint="@color/white"
+            app:hintEnabled="false"
             app:startIconDrawable="@drawable/email"
             app:startIconTint="@color/white"
             app:helperText="*Required"
+            app:helperTextTextColor="@color/white"
             app:errorEnabled="true">
 
             <!--this is the actual edit text which takes the input-->
@@ -99,6 +96,10 @@
                 android:id="@+id/emailLogIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/transparent"
+                android:hint="E-mail"
+                android:paddingTop="10dp"
+                android:textColorHint="@color/white_translucent"
                 android:focusableInTouchMode="true"
                 android:focusedByDefault="false"
                 android:inputType="textEmailAddress"
@@ -110,20 +111,17 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TextField2"
 
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Password"
-            app:hintTextAppearance="@style/TextInputLayoutHintText"
-            android:textColorHint="@color/white"
+            android:layout_marginTop="20dp"
+            app:hintEnabled="false"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorGradientStart"
+            app:passwordToggleTint="@color/white"
             app:passwordToggleDrawable="@drawable/view_password"
             app:startIconDrawable="@drawable/password"
             app:startIconTint="@color/white"
             app:helperText="*Required"
+            app:helperTextTextColor="@color/white"
             app:errorEnabled="true">
 
             <!--this is the actual edit text which takes the input-->
@@ -131,6 +129,10 @@
                 android:id="@+id/passwordLogIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/transparent"
+                android:hint="Password"
+                android:textColorHint="@color/white_translucent"
+                android:paddingTop="10dp"
                 android:focusableInTouchMode="true"
                 android:focusedByDefault="false"
                 android:inputType="textPassword"

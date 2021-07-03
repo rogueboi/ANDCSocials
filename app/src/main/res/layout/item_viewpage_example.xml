@@ -5,5 +5,4 @@
     android:id="@+id/image_view"
     android:adjustViewBounds="true"
     android:scaleType="centerCrop">
-
 </ImageView>

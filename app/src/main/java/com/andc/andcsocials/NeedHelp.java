@@ -20,7 +20,6 @@ public class NeedHelp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_need_help);
-        getSupportActionBar().hide();
 
         ConstraintLayout signInLayout = findViewById(R.id.needHelpLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)signInLayout.getBackground();
@@ -36,10 +35,8 @@ public class NeedHelp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
-                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startLogIn, ActivityOptions.makeSceneTransitionAnimation(NeedHelp.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                NeedHelp.this.finishAffinity();
             }
         });
 
@@ -49,10 +46,10 @@ public class NeedHelp extends AppCompatActivity {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
                 String email[] = {"andcsocials@gmail.com"};
-                String sub = "I need Help!!!";
+                String sub = "I need Help!!";
                 i.putExtra(Intent.EXTRA_EMAIL,email);
                 i.putExtra(Intent.EXTRA_SUBJECT,sub);
-                startActivity(Intent.createChooser(i,"Send Mail:"));
+                startActivity(Intent.createChooser(i,"Contact Us:"));
             }
         });
 

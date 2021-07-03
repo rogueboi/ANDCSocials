@@ -34,7 +34,6 @@ public class RegisterSocietyInformation_1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_society_information1);
-        Objects.requireNonNull(getSupportActionBar()).hide();
 
         ConstraintLayout logInLayout = findViewById(R.id.registerSocietyInformationLayout1);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
@@ -90,6 +89,7 @@ public class RegisterSocietyInformation_1 extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position==0) {
                     textField2.setVisibility(View.GONE);
+                    selectDepartment.setText("");
                     department="";
                 }
                 else if (position==1) {
@@ -103,10 +103,8 @@ public class RegisterSocietyInformation_1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
-                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startLogIn, ActivityOptions.makeSceneTransitionAnimation(RegisterSocietyInformation_1.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                RegisterSocietyInformation_1.this.finishAffinity();
             }
         });
 
@@ -115,6 +113,7 @@ public class RegisterSocietyInformation_1 extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectSocietyType.getText().toString().equals("")) {
                     textField1.setError("Select a Society Type!");
+                    textField1.setErrorIconDrawable(null);
                     return;
                 }
                 else {
@@ -123,6 +122,7 @@ public class RegisterSocietyInformation_1 extends AppCompatActivity {
 
                 if (selectSocietyType.getText().toString().equals("Departmental") && selectDepartment.getText().toString().equals("")) {
                     textField2.setError("Select a Department!");
+                    textField2.setErrorIconDrawable(null);
                     return;
                 }
                 else {

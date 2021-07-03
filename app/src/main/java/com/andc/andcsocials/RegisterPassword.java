@@ -6,10 +6,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +31,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class RegisterPassword extends AppCompatActivity {
 
@@ -46,7 +47,6 @@ public class RegisterPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_password);
-        getSupportActionBar().hide();
 
         ConstraintLayout logInLayout = findViewById(R.id.registerPasswordLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
@@ -86,10 +86,8 @@ public class RegisterPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
-                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startLogIn, ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                RegisterPassword.this.finishAffinity();
             }
         });
 
@@ -101,12 +99,20 @@ public class RegisterPassword extends AppCompatActivity {
 
                 if (password.length()<6) {
                     textField1.setError("Password must contain atleast 6 characters!");
+                    textField1.setErrorIconDrawable(null);
                     return;
+                }
+                else {
+                    textField1.setError(null);
                 }
 
                 if (!password.equals(confirmPassword)) {
                     textField2.setError("Password does not match!");
+                    textField2.setErrorIconDrawable(null);
                     return;
+                }
+                else {
+                    textField2.setError(null);
                 }
 
                 firebaseAuth.createUserWithEmailAndPassword(email,password)
@@ -115,19 +121,6 @@ public class RegisterPassword extends AppCompatActivity {
                             public void onComplete(@NonNull @org.jetbrains.annotations.NotNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     user=FirebaseAuth.getInstance().getCurrentUser();
-                                    user.sendEmailVerification()
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    Toast.makeText(RegisterPassword.this, "Verification mail has been sent to your email!", Toast.LENGTH_LONG).show();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull @NotNull Exception e) {
-                                                    Toast.makeText(RegisterPassword.this, "Fail to send the verification mail!\n"+e.getMessage(), Toast.LENGTH_LONG).show();
-                                                }
-                                            });
-
                                     userID= FirebaseAuth.getInstance().getCurrentUser().getUid();
                                     DocumentReference documentReference=firestore.collection("Users")
                                             .document(userID);
@@ -142,29 +135,40 @@ public class RegisterPassword extends AppCompatActivity {
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull @NotNull Exception e) {
-                                            Toast.makeText(RegisterPassword.this, "Error Occured.\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(RegisterPassword.this, "Error Occurred.\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
 
                                     DocumentReference documentReferenceRegistrationType;
                                     if (registrationType.equals("Society")) {
+                                        mapUser.put("Society Type",societyType);
+                                        documentReference.update(mapUser)
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull @NotNull Exception e) {
+                                                        Toast.makeText(RegisterPassword.this, "Fail to add Society Type Field in the User Information Database!", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+
                                         documentReferenceRegistrationType = firestore.collection("Society")
                                                 .document(societyType)
                                                 .collection("SocietyID")
                                                 .document(userID);
                                         Map<String, Object> mapSocietyRegistration = new HashMap<>();
-                                        mapSocietyRegistration.put("Registration Type", registrationType);
+                                        mapSocietyRegistration.put("Registration Type",registrationType);
                                         mapSocietyRegistration.put("Email", email);
                                         mapSocietyRegistration.put("Society Name",societyName);
                                         mapSocietyRegistration.put("Society Type",societyType);
                                         mapSocietyRegistration.put("Department",department);
                                         mapSocietyRegistration.put("Phone Number",phoneNumber);
+                                        mapSocietyRegistration.put("Is Email Verified?",false);
+                                        mapSocietyRegistration.put("Is Phone Number Verified?",false);
                                         mapSocietyRegistration.put("Official Account",false);
                                         documentReferenceRegistrationType.set(mapSocietyRegistration)
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull @NotNull Exception e) {
-                                                        Toast.makeText(RegisterPassword.this, "Fail to add Society Information in the Database!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(RegisterPassword.this, "Fail to add Society Information in the Society Information Database!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
                                     }
@@ -177,6 +181,8 @@ public class RegisterPassword extends AppCompatActivity {
                                         mapUserRegistration.put("Full Name",fullName);
                                         mapUserRegistration.put("Course",course);
                                         mapUserRegistration.put("Phone Number",phoneNumber);
+                                        mapUserRegistration.put("Is Email Verified?",false);
+                                        mapUserRegistration.put("Is Phone Number Verified?",false);
                                         mapUserRegistration.put("Student Coordinator of","none");
                                         documentReferenceRegistrationType.update(mapUserRegistration)
                                                 .addOnFailureListener(new OnFailureListener() {
@@ -186,10 +192,9 @@ public class RegisterPassword extends AppCompatActivity {
                                                     }
                                                 });
                                     }
-
-                                    Intent goToAuthenticateEmail=new Intent(getApplicationContext(),AuthenticateEmail.class);
-                                    goToAuthenticateEmail.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(goToAuthenticateEmail, ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
+                                    Intent goToMainActivity=new Intent(getApplicationContext(),MainActivity.class);
+                                    goToMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(goToMainActivity, ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
                                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                     RegisterPassword.this.finishAffinity();
                                 }

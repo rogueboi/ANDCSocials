@@ -4,46 +4,55 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
-    int[] images;
+   private List<SocietyInformation> societyInformations;
 
-    public MainAdapter (int[] images) {
-        this.images=images;
+    public MainAdapter (List<SocietyInformation> societyInformations) {
+        this.societyInformations=societyInformations;
     }
 
     @NonNull
     @NotNull
     @Override
     public MainAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_viewpage_example,parent,false);
+        return new ViewHolder( LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.cardview_item,parent,false));
 
-        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull MainAdapter.ViewHolder holder, int position) {
-        holder.image_view.setBackgroundResource(images[position]);
+        holder.setValues(societyInformations.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return images.length;
+        return societyInformations.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView image_view;
+        ImageView societyImage;
+        TextView societyName;
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            image_view=itemView.findViewById(R.id.image_view);
+            societyImage=itemView.findViewById(R.id.societyImage);
+            societyName=itemView.findViewById(R.id.societyName);
+        }
+
+        public void setValues(SocietyInformation societyInformation) {
+            societyImage.setImageResource(societyInformation.societyImageID);
+            societyName.setText(societyInformation.societyName);
         }
     }
 }

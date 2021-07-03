@@ -30,13 +30,6 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_ANDCSocials);
         setContentView(R.layout.activity_sign_in);
-        Objects.requireNonNull(getSupportActionBar()).hide();
-
-        ConstraintLayout signInLayout = findViewById(R.id.signInLayout);
-        AnimationDrawable animationDrawable = (AnimationDrawable)signInLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(2000);
-        animationDrawable.setExitFadeDuration(3500);
-        animationDrawable.start();
 
         firebaseAuth=FirebaseAuth.getInstance();
         user=firebaseAuth.getCurrentUser();
@@ -45,14 +38,6 @@ public class SignIn extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            user=firebaseAuth.getCurrentUser();
-                            if (!user.isEmailVerified()) {
-                                Intent startAuthenticateEmail=new Intent(getApplicationContext(),AuthenticateEmail.class);
-                                startAuthenticateEmail.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(startAuthenticateEmail,ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
-                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                SignIn.this.finishAffinity();
-                            }
                             Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
                             startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
@@ -62,6 +47,11 @@ public class SignIn extends AppCompatActivity {
                     });
         }
 
+        ConstraintLayout signInLayout = findViewById(R.id.signInLayout);
+        AnimationDrawable animationDrawable = (AnimationDrawable)signInLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(3500);
+        animationDrawable.start();
 
         needHelp=findViewById(R.id.help1);
         needHelp.setOnClickListener(new View.OnClickListener() {

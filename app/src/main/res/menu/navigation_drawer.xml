@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group_profile"
+        android:checkableBehavior="single">
+        <item
+            android:title="Profile"
+            android:icon="@drawable/user"
+            android:id="@+id/profileMenuItem"/>
+        <item
+            android:title="Application Status"
+            android:icon="@drawable/application_status"
+            android:id="@+id/applicationStatusMenuItem"/>
+    </group>
+
+    <group android:id="@+id/subGroup_updatePhoneAndEmail">
+        <item
+            android:title="Verify Phone Number"
+            android:id="@+id/verifyPhoneNumberMenuItem"
+            android:icon="@drawable/phone"/>
+        <item
+            android:title="Verify Email Address"
+            android:id="@+id/verifyEmailMenuItem"
+            android:icon="@drawable/email"/>
+    </group>
+
+    <group android:id="@+id/subGroup_settingsAndSupport"
+        android:checkableBehavior="single">
+        <item
+            android:title="Settings"
+            android:icon="@drawable/settings"
+            android:iconTint="@color/colorGradientStart"
+            android:id="@+id/settingsMenuItem"/>
+        <item
+            android:title="Support"
+            android:icon="@drawable/support"
+            android:iconTint="@color/colorGradientStart"
+            android:id="@+id/supportMenuItem" />
+    </group>
+
+    <group android:id="@+id/group_logout">
+        <item
+            android:title="Log Out"
+            android:icon="@drawable/logout"
+            android:id="@+id/logoutMenuItem"/>
+        <item
+            android:title="Delete Account"
+            android:icon="@drawable/delete"
+            android:id="@+id/deleteMenuItem"/>
+    </group>
+
+    <item
+        android:title="\u00A9 Acharya Narendra Dev College"
+        android:enabled="false"/>
+
+</menu>

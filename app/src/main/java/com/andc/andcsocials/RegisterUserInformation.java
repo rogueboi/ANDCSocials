@@ -35,8 +35,6 @@ public class RegisterUserInformation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user_information);
-        getSupportActionBar().hide();
-
         ConstraintLayout logInLayout = findViewById(R.id.registerUserInformationLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
@@ -84,32 +82,33 @@ public class RegisterUserInformation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
-                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startLogIn, ActivityOptions.makeSceneTransitionAnimation(RegisterUserInformation.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                RegisterUserInformation.this.finishAffinity();
             }
         });
 
         nextRegisterUserInformation1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fullName=fullNameRegister.getText().toString().trim();
+                if (fullName.length()<1) {
+                    textField1.setError("Full Name Required!");
+                    textField1.setErrorIconDrawable(null);
+                    return;
+                }
+                else {
+                    textField1.setError(null);
+                }
+
                 if (selectCourse.getText().toString().equals("")) {
                     textField2.setError("Select a Course!");
+                    textField2.setErrorIconDrawable(null);
                     return;
                 }
                 else {
                     textField2.setError(null);
                 }
 
-                fullName=fullNameRegister.getText().toString().trim();
-                if (fullName.length()<1) {
-                    textField1.setError("Full Name Required!");
-                    return;
-                }
-                else {
-                    textField1.setError(null);
-                }
                 Intent intentRegisterUserInformation1 = new Intent(getApplicationContext(),RegisterUserInformation_1.class);
                 intentRegisterUserInformation1.putExtra("registrationType",registrationType);
                 intentRegisterUserInformation1.putExtra("email",email);

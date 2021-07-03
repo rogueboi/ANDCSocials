@@ -7,6 +7,8 @@
         android:drawable="@drawable/andc_logo"
         android:gravity="center"
         android:height="300dp"
-        android:width="300dp" />
+        android:width="300dp" >
+
+    </item>
 
 </layer-list>

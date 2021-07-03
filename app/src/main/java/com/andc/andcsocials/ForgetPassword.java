@@ -35,7 +35,6 @@ public class ForgetPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
-        Objects.requireNonNull(getSupportActionBar()).hide();
 
         ConstraintLayout logInLayout = findViewById(R.id.forgetPasswordLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
@@ -53,10 +52,8 @@ public class ForgetPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
-                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startLogIn, ActivityOptions.makeSceneTransitionAnimation(ForgetPassword.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                ForgetPassword.this.finishAffinity();
             }
         });
 
@@ -66,6 +63,7 @@ public class ForgetPassword extends AppCompatActivity {
                 email = emailForgetPassword.getText().toString();
                 if (email.length()<1) {
                     textField1.setError("Email Address Required!");
+                    textField1.setErrorIconDrawable(null);
                     return;
                 }
                 else {

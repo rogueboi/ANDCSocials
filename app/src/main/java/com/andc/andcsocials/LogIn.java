@@ -39,7 +39,6 @@ public class LogIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        getSupportActionBar().hide();
 
         ConstraintLayout logInLayout = findViewById(R.id.logInLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
@@ -79,7 +78,8 @@ public class LogIn extends AppCompatActivity {
             public void onClick(View v) {
                 email=emailLogIn.getText().toString().trim();
                 if (email.length()==0) {
-                    textField1.setError("Email Required!!");
+                    textField1.setError("Email Required!");
+                    textField1.setErrorIconDrawable(null);
                     return;
                 }
                 else {
@@ -89,6 +89,7 @@ public class LogIn extends AppCompatActivity {
                 password=passwordLogIn.getText().toString();
                 if (password.length()<6) {
                     textField2.setError("Password should be atleast 6 characters long!");
+                    textField2.setErrorIconDrawable(null);
                     return;
                 }
                 else {
@@ -102,14 +103,6 @@ public class LogIn extends AppCompatActivity {
                             firebaseAuth.getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    user=firebaseAuth.getCurrentUser();
-                                    if (!user.isEmailVerified()) {
-                                        Intent startAuthenticateEmail=new Intent(getApplicationContext(),AuthenticateEmail.class);
-                                        startAuthenticateEmail.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(startAuthenticateEmail,ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
-                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                        LogIn.this.finishAffinity();
-                                    }
                                     Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
                                     startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());

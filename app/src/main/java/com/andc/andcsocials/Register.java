@@ -1,5 +1,6 @@
 package com.andc.andcsocials;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -16,9 +17,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.type.Color;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -38,7 +47,6 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        getSupportActionBar().hide();
 
         ConstraintLayout logInLayout = findViewById(R.id.registerLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
@@ -82,10 +90,8 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
-                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startLogIn, ActivityOptions.makeSceneTransitionAnimation(Register.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                Register.this.finishAffinity();
             }
         });
 
@@ -94,6 +100,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectRegisterType.getText().toString().equals("")) {
                     textField1.setError("Select a Registration Type!");
+                    textField1.setErrorIconDrawable(null);
                     return;
                 }
                 else {
@@ -103,6 +110,7 @@ public class Register extends AppCompatActivity {
                 email=emailRegister.getText().toString().trim();
                 if (email.length()<1) {
                     textField2.setError("Enter Correct E-mail Address!");
+                    textField2.setErrorIconDrawable(null);
                     return;
                 }
                 else {
@@ -111,7 +119,7 @@ public class Register extends AppCompatActivity {
 
                 Intent intentRegisterInformation = new Intent(getApplicationContext(), RegisterUserInformation.class);
                 if (RegistrationType.equals("Society")) {
-                        intentRegisterInformation = new Intent(getApplicationContext(), RegisterSocietyInformation.class);
+                    intentRegisterInformation = new Intent(getApplicationContext(), RegisterSocietyInformation.class);
                 }
 
                 intentRegisterInformation.putExtra("registrationType",RegistrationType);

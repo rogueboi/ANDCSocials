@@ -5,22 +5,51 @@
         <item name="colorPrimary">@color/colorGradientStart</item>
         <item name="colorPrimaryVariant">@color/colorGradientCenter</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/colorGradientEnd</item>
+        <item name="drawerArrowStyle">@style/DrawerIcon</item>
+        <item name="android:divider">@drawable/menu_item_padding</item>
+        <item name="divider">@drawable/menu_item_padding</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/colorGradientCenter</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/colorGradientStart</item>
         <!-- Customize your theme here. -->
-        <item name="android:actionBarStyle">@style/ThemeActionBar</item>
-        <item name="actionBarSize">62dp</item>
-        <item name="android:windowActionBarOverlay">true</item>
+        <!--item name="android:actionBarStyle">@style/ThemeActionBar</item-->
+        <!--item name="actionBarSize">62dp</item-->
+        <!--item name="android:windowActionBarOverlay">true</item-->
         <!-- Support library compatibility -->
-        <item name="actionBarStyle">@style/ThemeActionBar</item>
-        <item name="windowActionBarOverlay">true</item>
+        <!--item name="actionBarStyle">@style/ThemeActionBar</item-->
+        <!--item name="windowActionBarOverlay">true</item-->
         <!--item name="textInputStyle">@style/Widget.App.ExposedDropdownMenu</item-->
         <item name="android:autofilledHighlight">@color/transparent</item>
+        <!--item name="android:actionMenuTextColor">@color/colorGradientStart</item-->
+    </style>
+
+    <style name="Theme.ANDCSocials.App.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:autofilledHighlight">@color/transparent</item>
+    </style>
+
+    <style name="Theme.ANDCSocials.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ANDCSocials.popUpOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="TextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/raleway_semibold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/raleway_semibold</item>
+        <item name="itemTextColor">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NavDrawerStyle" parent="Widget.Design.NavigationView">
+        <item name="android:topRightRadius">25dp</item>
+    </style>
+
+    <style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">#AE000000</item>
     </style>
 
     <style name="splashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -41,18 +70,22 @@
         <item name="android:textSize">13sp</item>
         <item name="fontFamily">@font/noto_sans</item>
         <item name="boxStrokeColor">@color/colorGradientStart</item>
-        <item name="boxCollapsedPaddingTop">5dp</item>
+        <item name="boxCollapsedPaddingTop">15dp</item>
     </style>
 
-    <style name="ThemeActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid">
+    <style name="ThemeOverlay.ANDCSocials.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
+
+    <!--style name="ThemeActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid">
         <item name="android:bottomLeftRadius">5dp</item>
         <item name="android:bottomRightRadius">5dp</item>
         <item name="android:titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionBar.Title</item>
         <item name="android:background">@color/transparent</item>
         <item name="android:layout_marginBottom">5dp</item>
-        <!-- Support library compatibility -->
         <item name="background">@drawable/line_divider</item>
-    </style>
+    </style-->
 
     <!--style name="Widget.App.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.ExposedDropdownMenu</item>

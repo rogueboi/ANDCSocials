@@ -33,7 +33,6 @@ public class RegisterSocietyInformation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_society_information);
-        Objects.requireNonNull(getSupportActionBar()).hide();
 
         ConstraintLayout logInLayout = findViewById(R.id.registerSocietyInformationLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
@@ -57,10 +56,8 @@ public class RegisterSocietyInformation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
-                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startLogIn, ActivityOptions.makeSceneTransitionAnimation(RegisterSocietyInformation.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                RegisterSocietyInformation.this.finishAffinity();
             }
         });
 
@@ -70,6 +67,7 @@ public class RegisterSocietyInformation extends AppCompatActivity {
                 societyName=societyNameRegister.getText().toString().trim();
                 if (societyName.length()<1) {
                     textField1.setError("Society Name is Required!");
+                    textField1.setErrorIconDrawable(null);
                     return;
                 }
                 else {
@@ -79,6 +77,7 @@ public class RegisterSocietyInformation extends AppCompatActivity {
                 phoneNumber=phoneNumberRegister.getText().toString();
                 if (phoneNumber.length()!=10) {
                     textField2.setError("10 digit Phone Number is Required!");
+                    textField2.setErrorIconDrawable(null);
                     return;
                 }
                 else {

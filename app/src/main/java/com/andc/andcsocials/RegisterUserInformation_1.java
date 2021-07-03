@@ -28,7 +28,6 @@ public class RegisterUserInformation_1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user_information1);
-        getSupportActionBar().hide();
 
         ConstraintLayout logInLayout = findViewById(R.id.registerUserInformationLayout1);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
@@ -44,38 +43,6 @@ public class RegisterUserInformation_1 extends AppCompatActivity {
 
         textField1=findViewById(R.id.TextField1);
         phoneNumberRegister=findViewById(R.id.phoneNumberRegister);
-
-        phoneNumberRegister.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (phoneNumberRegister.length()==0) {
-                    nextRegisterPassword.setText("Skip");
-                }
-                else {
-                    nextRegisterPassword.setText("Next");
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (phoneNumberRegister.length()==0) {
-                    nextRegisterPassword.setText("Skip");
-                }
-                else {
-                    nextRegisterPassword.setText("Next");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (phoneNumberRegister.length()==0) {
-                    nextRegisterPassword.setText("Skip");
-                }
-                else {
-                    nextRegisterPassword.setText("Next");
-                }
-            }
-        });
         nextRegisterPassword=findViewById(R.id.nextRegisterPassword);
 
         goToLogin=findViewById(R.id.goToLogin);
@@ -83,10 +50,8 @@ public class RegisterUserInformation_1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startLogIn=new Intent(getApplicationContext(),LogIn.class);
-                startLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startLogIn, ActivityOptions.makeSceneTransitionAnimation(RegisterUserInformation_1.this).toBundle());
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                RegisterUserInformation_1.this.finishAffinity();
             }
         });
 
@@ -94,8 +59,9 @@ public class RegisterUserInformation_1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 phoneNumber=phoneNumberRegister.getText().toString().trim();
-                if (phoneNumber.length()>0 && phoneNumber.length()!=10) {
+                if (phoneNumber.length()!=10) {
                     textField1.setError("Enter 10 digit Phone Number!");
+                    textField1.setErrorIconDrawable(null);
                     return;
                 }
                 else {

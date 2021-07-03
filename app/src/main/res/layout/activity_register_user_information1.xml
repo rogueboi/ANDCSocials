@@ -78,10 +78,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -102,16 +102,15 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TextField1"
 
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number"
-            app:hintTextAppearance="@style/TextInputLayoutHintText"
+            app:hintEnabled="false"
             app:helperText="*Required"
+            app:helperTextTextColor="@color/white"
             app:errorEnabled="true"
             app:counterEnabled="true"
             app:counterMaxLength="10"
+            app:counterTextColor="@color/white"
             app:startIconDrawable="@drawable/phone"
             app:startIconTint="@color/white"
             android:textColorHint="@color/white">
@@ -121,6 +120,10 @@
                 android:id="@+id/phoneNumberRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/transparent"
+                android:paddingTop="10dp"
+                android:hint="Phone Number"
+                android:textColorHint="@color/white_translucent"
                 android:focusableInTouchMode="true"
                 android:focusedByDefault="false"
                 android:inputType="phone"
