@@ -82,12 +82,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Summary or Quotation of the Society Summary or Quotation of the Society Summary or Quotation of the Society"
-                    android:textSize="15sp"
+                    android:layout_gravity="center"
                     android:fontFamily="@font/crushed"
-                    android:textColor="@color/black"
                     android:padding="8dp"
-                    android:layout_gravity="center" />
+                    android:text="Summary or Quotation of the Society Summary or Quotation of the Society Summary or Quotation of the Society"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
 
             </LinearLayout>
