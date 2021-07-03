@@ -68,7 +68,7 @@ public class SignIn extends AppCompatActivity {
         testButn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), imageslider.class));
+                startActivity(new Intent(getApplicationContext(), society_dashboard.class));
 
 
             }
