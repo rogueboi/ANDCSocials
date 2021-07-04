@@ -6,11 +6,19 @@
     tools:context=".society_coordinators_dashboard">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Here will come all the names also maybe photos of coordinators"
-        android:gravity="center"
-        android:background="@color/colorGradientEnd"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerViewCoordinators"/>
+
+
+
+        </LinearLayout>
 
 </FrameLayout>
