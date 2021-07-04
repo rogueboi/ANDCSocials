@@ -4,15 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SocietyPhotos_dashboard"
-    android:background="@color/colorGradientCenter">
+    android:background="@color/white_translucent">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postRecyclerDashboard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Photos will come here ok"
-
-        android:gravity="center"
-        />
+        android:clipToPadding="false"
+        android:paddingEnd="15dp"
+        android:paddingStart="0dp"
+        android:paddingBottom="15dp"/>
 
 </FrameLayout>
