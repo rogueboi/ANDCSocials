@@ -91,7 +91,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/raleway_semibold"
-        android:text="Enter the 6-digit OTP that we have \nsend youthrough a message on your \nregistered phone number."
+        android:text=""
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,15 +101,14 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutPhoneNumber"
-        style="@style/LinearLayout.RoundedCorners"
+        style="@style/Layout.RoundedCorners"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@color/transparent"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
+        android:paddingHorizontal="15dp"
         android:paddingVertical="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.448"
@@ -126,9 +125,9 @@
             app:helperText="*Required"
             app:helperTextTextColor="@color/white"
             app:counterEnabled="true"
-            app:counterMaxLength="6"
+            app:counterMaxLength="10"
             app:counterTextColor="@color/white"
-            app:startIconDrawable="@drawable/verify_otp"
+            app:startIconDrawable="@drawable/phone"
             app:startIconTint="@color/white">
 
             <!--this is the actual edit text which takes the input-->
@@ -138,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:backgroundTint="@color/transparent"
-                android:hint="OTP"
+                android:hint="Phone Number"
                 android:textColorHint="@color/white_translucent"
                 android:focusableInTouchMode="true"
                 android:focusedByDefault="false"

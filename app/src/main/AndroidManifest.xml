@@ -12,18 +12,7 @@
         android:roundIcon="@mipmap/andc_logo_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ANDCSocials">
-        <activity android:name=".ViewPagerExample"></activity>
-        <activity android:name=".ForgetPassword" />
-        <activity android:name=".RegisterSocietyInformation_1" />
-        <activity android:name=".RegisterUserInformation_1" />
-        <activity android:name=".RegisterSocietyInformation" />
-        <activity android:name=".AuthenticateEmail" />
-        <activity android:name=".NeedHelp" />
-        <activity android:name=".society_menu" />
-        <activity android:name=".RegisterUserInformation" />
-        <activity android:name=".RegisterPassword" />
-        <activity android:name=".Register" />
-        <activity android:name=".LogIn" />
+
         <activity
             android:name=".SignIn"
             android:theme="@style/splashScreenTheme">
@@ -33,10 +22,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".NeedHelp" />
+        <activity android:name=".Register" />
+        <activity android:name=".RegisterUserInformation" />
+        <activity android:name=".RegisterSocietyInformation" />
+        <activity android:name=".RegisterUserInformation_1" />
+        <activity android:name=".RegisterSocietyInformation_1" />
+        <activity android:name=".RegisterPassword" />
+        <activity android:name=".LogIn" />
+        <activity android:name=".ForgetPassword" />
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".AuthenticateEmail" />
+        <activity android:name=".AuthenticatePhoneNumber"/>
+
+        <activity android:name=".society_dashboard"/>
+        <activity android:name=".society_menu" />
+
+        <activity android:name=".ViewPagerExample"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

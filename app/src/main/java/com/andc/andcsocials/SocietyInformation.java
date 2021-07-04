@@ -1,6 +1,6 @@
 package com.andc.andcsocials;
 
-class SocietyInformation {
+public class SocietyInformation {
     int societyImageID;
     String societyName;
 }

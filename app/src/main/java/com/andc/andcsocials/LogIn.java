@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,8 +23,15 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LogIn extends AppCompatActivity {
 
@@ -33,7 +41,7 @@ public class LogIn extends AppCompatActivity {
     private ExtendedFloatingActionButton login;
 
     private FirebaseAuth firebaseAuth;
-    private FirebaseUser user;
+    FirebaseFirestore firestore;
     private String email="", password="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,7 @@ public class LogIn extends AppCompatActivity {
         passwordLogIn=findViewById(R.id.passwordLogIn);
         login=findViewById(R.id.login);
         firebaseAuth=FirebaseAuth.getInstance();
+        firestore=FirebaseFirestore.getInstance();
 
         registerRedirect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,16 +109,28 @@ public class LogIn extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            firebaseAuth.getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
-                                    startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
-                                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                    LogIn.this.finishAffinity();
-                                }
-                            });
+                            CollectionReference collectionReference= firestore.collection("Society");
+
+                            collectionReference.whereEqualTo("Email",email).get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                                            if (!task.getResult().isEmpty()) {
+                                                Intent startSocietyDashboardActivity=new Intent(getApplicationContext(), society_dashboard.class);
+                                                startSocietyDashboardActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                LogIn.this.finishAffinity();
+                                                startActivity(startSocietyDashboardActivity, ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
+                                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                            }
+                                            else {
+                                                Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
+                                                startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                LogIn.this.finishAffinity();
+                                                startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
+                                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                            }
+                                        }
+                                    });
                         }
                         else {
                             Toast.makeText(getApplicationContext(), "Error Occurred!!\n"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();

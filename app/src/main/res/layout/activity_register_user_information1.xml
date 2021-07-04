@@ -85,7 +85,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        style="@style/LinearLayout.RoundedCorners"
+        style="@style/Layout.RoundedCorners"
         android:background="@color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Skip"
+        android:text="Next"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:backgroundTint="@color/colorGradientStart"

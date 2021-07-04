@@ -85,7 +85,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        style="@style/LinearLayout.RoundedCorners"
+        style="@style/Layout.RoundedCorners"
         android:background="@color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

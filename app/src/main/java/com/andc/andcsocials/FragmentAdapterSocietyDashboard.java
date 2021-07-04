@@ -9,7 +9,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import org.jetbrains.annotations.NotNull;
 
 public class FragmentAdapterSocietyDashboard extends FragmentStateAdapter {
-    public FragmentAdapterSocietyDashboard(@NonNull @NotNull FragmentManager fragmentManager, @NonNull @NotNull Lifecycle lifecycle) {
+
+    public FragmentAdapterSocietyDashboard(@NonNull @NotNull FragmentManager fragmentManager,
+                                           @NonNull @NotNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 
@@ -17,7 +19,6 @@ public class FragmentAdapterSocietyDashboard extends FragmentStateAdapter {
     @NotNull
     @Override
     public Fragment createFragment(int position) {
-
         switch (position)
         {
             case 1:
@@ -26,13 +27,8 @@ public class FragmentAdapterSocietyDashboard extends FragmentStateAdapter {
                 return new info_links_society_Dashboard();
 
         }
-
         return new SocietyPhotos_dashboard();
-
-
-
     }
-
 
     @Override
     public int getItemCount() {

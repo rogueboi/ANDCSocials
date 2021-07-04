@@ -8,11 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.makeramen.roundedimageview.RoundedImageView;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder>{
 
@@ -53,7 +53,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 
     class SliderViewHolder extends RecyclerView.ViewHolder {
 
-        private RoundedImageView imageView;
+        private CircleImageView imageView;
 
         SliderViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -62,8 +62,6 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 
         void setImage(SliderItem slideritem)
         {
-
-
             imageView.setImageResource(slideritem.getImage());
         }
 

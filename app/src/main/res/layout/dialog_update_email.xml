@@ -1,45 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     style="@style/Theme.ANDCSocials.App.Dialog"
     android:padding="5dp">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/updateEmailDialogCloseButton"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_gravity="end"
-        android:backgroundTint="@color/red"
-        android:elevation="5dp"
-        app:borderWidth="0dp"
-        android:src="@drawable/close"
-        app:fabCustomSize="38dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.997"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        app:cardCornerRadius="12dp"
+        android:backgroundTint="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/updateEmailDialogCloseButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:fabCustomSize="30dp"
+            app:elevation="15dp"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/navBarUsername"
+            android:elevation="5dp"
+            app:borderWidth="0dp"
+            android:src="@drawable/close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.997"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/updateEmailDialogLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/gradient_end"
+            android:background="@drawable/gradient_center"
             android:padding="15dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -47,7 +44,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:src="@drawable/andc_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.042"
@@ -61,7 +58,7 @@
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/raleway_semibold"
                 android:text="Socials"
-                android:textColor="@color/colorGradientStart"
+                android:textColor="@color/white"
                 android:textSize="23sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/profilePictureNavigationBar"
@@ -89,7 +86,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayoutPhoneNumber"
-                style="@style/LinearLayout.RoundedCorners"
+                style="@style/Layout.RoundedCorners"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -105,7 +102,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/TextField1"
-
+                    style="@style/EditText.AutoFilledHighlightColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
@@ -139,16 +136,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
-                app:iconSize="18dp"
-                app:iconPadding="10dp"
+                android:layout_marginBottom="8dp"
                 android:backgroundTint="@color/colorGradientStart"
                 android:padding="0dp"
+                android:shadowColor="@color/transparent"
                 android:text="Update"
                 android:textSize="13sp"
                 app:icon="@drawable/email"
-                android:shadowColor="@color/transparent"
+                app:iconPadding="10dp"
+                app:iconSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"

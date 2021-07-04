@@ -21,8 +21,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.shape.CornerFamily;
@@ -34,9 +32,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Source;
 
 import org.jetbrains.annotations.NotNull;
+
+import static java.lang.String.valueOf;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,11 +49,13 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseFirestore firestore;
     private String userID="";
-    public String societyType="";
-    private DocumentReference documentReference, documentReferenceRegistrationType;
-    private TextView username, helper;
-    int check=0;
+    private DocumentReference documentReference;
+    private TextView username;
     private Fragment fragment;
+
+    public interface ReadStudentName {
+        void onResponse(String name);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         userID=user.getUid();
 
-        readFirebaseName(new ReadSocietyName() {
+        readStudentName(new ReadStudentName() {
             @Override
             public void onResponse(String name) {
                 username.setText(name);
@@ -118,11 +119,13 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.verifyPhoneNumberMenuItem:
                         Intent verifyPhoneNumberIntent=new Intent(getApplicationContext(), AuthenticatePhoneNumber.class);
+                        verifyPhoneNumberIntent.putExtra("registrationType","Student");
                         startActivity(verifyPhoneNumberIntent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         break;
                     case R.id.verifyEmailMenuItem:
                         Intent verifyEmailIntent=new Intent(getApplicationContext(), AuthenticateEmail.class);
+                        verifyEmailIntent.putExtra("registrationType","Student");
                         startActivity(verifyEmailIntent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         break;
@@ -153,32 +156,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Toast.makeText(this, username.getText().toString(), Toast.LENGTH_SHORT).show();
+
     }
 
-    private void readFirebaseName(ReadSocietyName readSocietyName) {
-        documentReference=firestore.collection("Users")
+    private void readStudentName(ReadStudentName readStudentName) {
+        documentReference=firestore.collection("Student")
                 .document(userID);
 
         documentReference.addSnapshotListener(MainActivity.this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value,
                                 @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                if (value.getString("Registration Type").equals("Society")) {
-                    readSocietyName.onResponse(value.getString("Society Type"));
-                    documentReferenceRegistrationType=firestore.collection("Society")
-                            .document(username.getText().toString())
-                            .collection("SocietyID")
-                            .document(userID);
-                    documentReferenceRegistrationType.addSnapshotListener(MainActivity.this, new EventListener<DocumentSnapshot>() {
-                        @Override
-                        public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                            readSocietyName.onResponse(value.getString("Society Name"));
-                        }
-                    });
-                }
-                else {
-                    readSocietyName.onResponse(value.getString("Full Name"));
-                }
+                readStudentName.onResponse(value.getString("Full Name"));
             }
         });
     }
