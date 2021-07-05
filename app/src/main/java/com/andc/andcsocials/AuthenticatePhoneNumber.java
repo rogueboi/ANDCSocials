@@ -112,8 +112,16 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
                     String text="Enter your phone number ending\nwith +91 ******";
                     verifyPhoneNumberMessage.setText(text.concat(phoneNumber.substring(6))+"\nto continue...");
                 }
-                else if (phoneNumber.isEmpty()) {
-                    Toast.makeText(AuthenticatePhoneNumber.this, "Update Your Phone Number!!", Toast.LENGTH_SHORT).show();
+                else if (i>1) {
+                    verifyPhoneNumberMessage.setText("You have exhausted your quota for the current login session!!");
+                    resendMessage.setVisibility(View.GONE);
+                    resendOTPMessage.setVisibility(View.GONE);
+                    verifyPhoneNumberMessage.setVisibility(View.GONE);
+                    linearLayoutPhoneNumber.setVisibility(View.GONE);
+                    verifyPhone.setEnabled(false);
+                    verifyPhone.setBackgroundColor(getColor(R.color.disabled));
+                    updatePhoneNumber.setEnabled(false);
+                    updatePhoneNumber.setBackgroundColor(getColor(R.color.disabled));
                 }
             }
         });
