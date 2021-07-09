@@ -43,9 +43,9 @@
             android:icon="@drawable/logout"
             android:id="@+id/logoutMenuItem"/>
         <item
-            android:title="Delete Account"
-            android:icon="@drawable/delete"
-            android:id="@+id/deleteMenuItem"/>
+            android:title="Reset Password"
+            android:icon="@drawable/password"
+            android:id="@+id/resetPasswordMenuItem"/>
     </group>
 
     <item

@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.logoutMenuItem:
                         logOut();
                         break;
-                    case R.id.deleteMenuItem:
+                    case R.id.resetPasswordMenuItem:
                         break;
                 }
                 return true;
