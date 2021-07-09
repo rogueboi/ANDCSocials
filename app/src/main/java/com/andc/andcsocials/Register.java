@@ -25,6 +25,8 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.SignInMethodQueryResult;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.type.Color;
 
 import org.jetbrains.annotations.NotNull;
@@ -117,15 +119,43 @@ public class Register extends AppCompatActivity {
                     textField2.setError(null);
                 }
 
-                Intent intentRegisterInformation = new Intent(getApplicationContext(), RegisterUserInformation.class);
-                if (RegistrationType.equals("Society")) {
-                    intentRegisterInformation = new Intent(getApplicationContext(), RegisterSocietyInformation.class);
-                }
-
+                Intent intentRegisterInformation=new Intent(getApplicationContext(), RegisterPassword.class);
                 intentRegisterInformation.putExtra("registrationType",RegistrationType);
                 intentRegisterInformation.putExtra("email",email);
-                startActivity(intentRegisterInformation, ActivityOptions.makeSceneTransitionAnimation(Register.this).toBundle());
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                if (selectRegisterType.equals("Society")) {
+                    FirebaseFirestore.getInstance().collectionGroup("SocietyID")
+                            .whereEqualTo("Email",email).get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                                        startActivity(intentRegisterInformation, ActivityOptions.makeSceneTransitionAnimation(Register.this).toBundle());
+                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                    }
+                                    else {
+                                        Toast.makeText(Register.this, "Society details for the Email "+email+" does not exist in the Database!", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                }
+                else {
+                    FirebaseFirestore.getInstance().collectionGroup("StudentID")
+                            .whereEqualTo("Email",email).get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                                        startActivity(intentRegisterInformation, ActivityOptions.makeSceneTransitionAnimation(Register.this).toBundle());
+                                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                    }
+                                    else {
+                                        Toast.makeText(Register.this, "Student details for the Email "+email+" does not exist in the Database!", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                }
+
             }
         });
     }

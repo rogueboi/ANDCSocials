@@ -52,7 +52,7 @@ public class AuthenticateEmail extends AppCompatActivity implements UpdateEmailD
     private FirebaseFirestore firestore;
 
     DocumentSnapshot documentSnapshot;
-    private String userID, registrationType;
+    private String userID, registrationType, societyType;
     private DocumentReference documentReference;
     protected static int i=0;
     long lastClickTimeForUpdateEmail;
@@ -80,11 +80,8 @@ public class AuthenticateEmail extends AppCompatActivity implements UpdateEmailD
         user=firebaseAuth.getCurrentUser();
         userID=user.getUid();
 
-        Intent getRegistationType=getIntent();
-        registrationType=getRegistationType.getStringExtra("registrationType");
-
-        documentReference=firestore.collection(registrationType)
-                .document(userID);
+        Intent getDocumentReference=getIntent();
+        documentReference=firestore.document(getDocumentReference.getStringExtra("documentReference"));
 
         i++;
         documentReference.addSnapshotListener(AuthenticateEmail.this, new EventListener<DocumentSnapshot>() {
@@ -191,11 +188,12 @@ public class AuthenticateEmail extends AppCompatActivity implements UpdateEmailD
                                         @Override
                                         public void onComplete(@NonNull @NotNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
-                                                startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(AuthenticateEmail.this).toBundle());
-                                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                                AuthenticateEmail.this.finishAffinity();
+                                                emailText.setText("Your Email Address has\nbeen verified successfully!");
+                                                waitingText.setVisibility(View.GONE);
+                                                verifyEmailMessage.setVisibility(View.GONE);
+                                                resendAuthenticateEmailLink.setVisibility(View.GONE);
+                                                verifyEmail.setEnabled(false);
+                                                verifyEmail.setBackgroundColor(getColor(R.color.disabled));
                                             }
                                         }
                                     });

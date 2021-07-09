@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,8 +18,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
@@ -39,6 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import static com.andc.andcsocials.MainActivity.k;
 import static java.lang.String.valueOf;
 
 public class AuthenticatePhoneNumber extends AppCompatActivity {
@@ -54,7 +59,7 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks;
     private PhoneAuthProvider.ForceResendingToken Token;
 
-    private String userID="", verificationID="", otpText="", registrationType;
+    private String userID="", verificationID="000000", otpText="", registrationType;
     private DocumentReference documentReference;
     public static int i=0;
 
@@ -86,17 +91,14 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
         user=firebaseAuth.getCurrentUser();
         userID=user.getUid();
 
-        Intent getRegistrationType=getIntent();
-        registrationType=getRegistrationType.getStringExtra("registrationType");
-
-        documentReference=firestore.collection(registrationType)
-                .document(userID);
+        Intent getDocumentReference=getIntent();
+        documentReference=firestore.document(getDocumentReference.getStringExtra("documentReference"));
 
         i++;
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                String phoneNumber=value.getString("Phone Number");
+                String phoneNumber="+"+value.get("Phone Number").toString();
                 if (value.getBoolean("Is Phone Number Verified?")) {
                     phoneNumberText.setText("Your Phone Number has\nbeen verified successfully!");
                     resendMessage.setVisibility(View.GONE);
@@ -110,7 +112,7 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
                     resendOTPMessage.setVisibility(View.GONE);
                     resendMessage.setVisibility(View.GONE);
                     String text="Enter your phone number ending\nwith +91 ******";
-                    verifyPhoneNumberMessage.setText(text.concat(phoneNumber.substring(6))+"\nto continue...");
+                    verifyPhoneNumberMessage.setText(text.concat(phoneNumber.substring(9))+"\nto continue...");
                 }
                 else if (i>1) {
                     verifyPhoneNumberMessage.setText("You have exhausted your quota for the current login session!!");
@@ -144,8 +146,8 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
                 documentReference.addSnapshotListener(AuthenticatePhoneNumber.this, new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                        String phoneNumber=value.getString("Phone Number");
-                        verifyPhoneNumber("+91"+phoneNumber);
+                        String phoneNumber="+"+value.get("Phone Number").toString();
+                        verifyPhoneNumber(phoneNumber);
 
                         resendMessage.setEnabled(false);
                         resendMessage.setBackgroundColor(getColor(R.color.disabled));
@@ -162,7 +164,7 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
                     documentReference.addSnapshotListener(AuthenticatePhoneNumber.this, new EventListener<DocumentSnapshot>() {
                         @Override
                         public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                            if (value.getString("Phone Number").equals(otpText)) {
+                            if (value.get("Phone Number").toString().substring(2).equals(otpText)) {
                                 verifyPhoneNumberMessage.setText("Enter the 6-digit OTP that we \nhave send you on your \nregistered phone number.");
                                 resendMessage.setVisibility(View.VISIBLE);
                                 resendMessage.setEnabled(true);
@@ -194,8 +196,34 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
                     textField1.setError(null);
                 }
 
-                PhoneAuthCredential credential=PhoneAuthProvider.getCredential(verificationID,otpText);
-                callbacks.onVerificationCompleted(credential);
+                user.updatePhoneNumber(PhoneAuthProvider.getCredential(verificationID,otpText))
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Map<String, Object> mapRegistration = new HashMap<>();
+                                mapRegistration.put("Is Phone Number Verified?", true);
+                                documentReference.update(mapRegistration)
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull @NotNull Exception e) {
+                                                Toast.makeText(AuthenticatePhoneNumber.this, "Fail to Update \"Is Phone Number Verified?\" field in the Database!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                phoneNumberText.setText("Your Phone Number has\nbeen verified successfully!");
+                                resendMessage.setVisibility(View.GONE);
+                                resendOTPMessage.setVisibility(View.GONE);
+                                verifyPhoneNumberMessage.setVisibility(View.GONE);
+                                linearLayoutPhoneNumber.setVisibility(View.GONE);
+                                verifyPhone.setEnabled(false);
+                                verifyPhone.setBackgroundColor(getColor(R.color.disabled));
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull @NotNull Exception e) {
+                                Toast.makeText(AuthenticatePhoneNumber.this, "Incorrect OTP!! Unable to Verify your Phone Number!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
 
@@ -203,27 +231,35 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
             @Override
             public void onVerificationCompleted(@NonNull @NotNull PhoneAuthCredential phoneAuthCredential) {
                 String receivedCode=phoneAuthCredential.getSmsCode();
-                if(verificationID.equals(otpText)) {
-                    user.updatePhoneNumber(phoneAuthCredential);
-                    Map<String, Object> mapRegistration = new HashMap<>();
-                    mapRegistration.put("Is Phone Number Verified?",true);
-                    documentReference.update(mapRegistration)
+                if(receivedCode.equals(otpText)) {
+                    user.updatePhoneNumber(phoneAuthCredential)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Map<String, Object> mapRegistration = new HashMap<>();
+                                    mapRegistration.put("Is Phone Number Verified?", true);
+                                    documentReference.update(mapRegistration)
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull @NotNull Exception e) {
+                                                    Toast.makeText(AuthenticatePhoneNumber.this, "Fail to Update \"Is Phone Number Verified?\" field in the Database!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                    phoneNumberText.setText("Your Phone Number has\nbeen verified successfully!");
+                                    resendMessage.setVisibility(View.GONE);
+                                    resendOTPMessage.setVisibility(View.GONE);
+                                    verifyPhoneNumberMessage.setVisibility(View.GONE);
+                                    linearLayoutPhoneNumber.setVisibility(View.GONE);
+                                    verifyPhone.setEnabled(false);
+                                    verifyPhone.setBackgroundColor(getColor(R.color.disabled));
+                                }
+                            })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull @NotNull Exception e) {
-                                    Toast.makeText(AuthenticatePhoneNumber.this, "Fail to Update \"Is Phone Number Verified?\" field in the Database!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AuthenticatePhoneNumber.this, "Incorrect OTP!! Unable to Verify your Phone Number!", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                    phoneNumberText.setText("Your Phone Number has\nbeen verified successfully!");
-                    resendMessage.setVisibility(View.GONE);
-                    resendOTPMessage.setVisibility(View.GONE);
-                    verifyPhoneNumberMessage.setVisibility(View.GONE);
-                    linearLayoutPhoneNumber.setVisibility(View.GONE);
-                    verifyPhone.setEnabled(false);
-                    verifyPhone.setBackgroundColor(getColor(R.color.disabled));
-                }
-                else {
-                    Toast.makeText(AuthenticatePhoneNumber.this, "Incorrect OTP!! Unable to Verify your Phone Number!", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -253,6 +289,9 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
         };
     }
 
+    private void initializeCredentials() {
+    }
+
     public void verifyPhoneNumber(String phoneNum) {
         PhoneAuthOptions options=PhoneAuthOptions.newBuilder(firebaseAuth)
                 .setActivity(AuthenticatePhoneNumber.this)
@@ -262,5 +301,11 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
                 .build();
 
         PhoneAuthProvider.verifyPhoneNumber(options);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        i=0;
     }
 }
