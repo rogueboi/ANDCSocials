@@ -4,7 +4,7 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/colorGradientStart"
+    android:backgroundTint="@color/dirty_white"
     android:layout_margin="10dp"
     cardview:cardCornerRadius="12dp"
     cardview:cardElevation="7dp">
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans"
             android:text="DHWANI"
-            android:textColor="@color/white"
+            android:textColor="@color/colorGradientStart"
             android:textSize="23sp"
             android:textStyle="bold"
             cardview:layout_constraintBottom_toBottomOf="parent"
@@ -60,8 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/noto_sans"
-            android:text="Lorem Ipsum sf \ncgsbjfggfgcgfcfgcgfcghcghfcgfchgfchgcfgcfgcgfcfhgcfhgcfhgfcfgcsbgfcjgsfgscfg\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-            android:textColor="@color/white"
+            android:text="Society Description:\n\nTeacher Coordinator:\nStudent Coordinator:\nContact:"
+            android:textColor="@color/colorGradientStart"
             android:textSize="13sp"
             android:textStyle="bold" />
 
@@ -72,6 +72,7 @@
             android:layout_height="56dp"
             android:layout_marginTop="36dp"
             android:src="@drawable/next"
+            android:layout_marginRight="5dp"
             cardview:fabCustomSize="56dp"
             cardview:layout_constraintBottom_toBottomOf="parent"
             cardview:layout_constraintEnd_toEndOf="parent"
