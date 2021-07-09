@@ -11,7 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="match_parent"
+        android:minHeight="420dp"
+        android:layout_gravity="center"
         android:paddingVertical="10dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
@@ -26,7 +28,7 @@
             cardview:layout_constraintHorizontal_bias="0.0"
             cardview:layout_constraintStart_toStartOf="@+id/societyName"
             cardview:layout_constraintTop_toTopOf="parent"
-            cardview:layout_constraintVertical_bias="0.079" />
+            cardview:layout_constraintVertical_bias="0.046" />
 
         <TextView
             android:id="@+id/societyName"
@@ -54,7 +56,7 @@
             cardview:layout_constraintTop_toBottomOf="@+id/societyName">
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/noto_sans"

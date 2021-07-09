@@ -46,7 +46,7 @@ import java.util.concurrent.TimeUnit;
 import static com.andc.andcsocials.MainActivity.k;
 import static java.lang.String.valueOf;
 
-public class AuthenticatePhoneNumber extends AppCompatActivity {
+public class AuthenticatePhoneNumber extends AppCompatActivity implements UpdatePhoneNumberDialog.UpdatePhoneNumberDialogListener {
 
     private ExtendedFloatingActionButton updatePhoneNumber, resendMessage, verifyPhone;
     private TextView phoneNumberText, verifyPhoneNumberMessage, resendOTPMessage;
@@ -131,12 +131,7 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
         updatePhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent startSignIn=new Intent(getApplicationContext(),SignIn.class);
-                startSignIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                AuthenticatePhoneNumber.this.finishAffinity();
-                startActivity(startSignIn, ActivityOptions.makeSceneTransitionAnimation(AuthenticatePhoneNumber.this).toBundle());
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                openUpdatePhoneNumberDialog();
             }
         });
 
@@ -266,7 +261,6 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
             @Override
             public void onVerificationFailed(@NonNull @NotNull FirebaseException e) {
                 Toast.makeText(AuthenticatePhoneNumber.this, "Phone Number Verification Failed!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("Hemlo Hemlo",e.getMessage());
             }
 
             @Override
@@ -289,7 +283,9 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
         };
     }
 
-    private void initializeCredentials() {
+    private void openUpdatePhoneNumberDialog() {
+        UpdatePhoneNumberDialog updatePhoneNumberDialog=new UpdatePhoneNumberDialog();
+        updatePhoneNumberDialog.show(getSupportFragmentManager(),"Update Phone Number Dialog");
     }
 
     public void verifyPhoneNumber(String phoneNum) {
@@ -307,5 +303,26 @@ public class AuthenticatePhoneNumber extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         i=0;
+    }
+
+    @Override
+    public void checkSignOutStatus(long newPhone) {
+        Map<String, Object> mapRegistration = new HashMap<>();
+        mapRegistration.put("Phone Number",newPhone);
+        mapRegistration.put("Is Phone Number Verified?",false);
+        documentReference.update(mapRegistration)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                        Toast.makeText(AuthenticatePhoneNumber.this, "Your Phone Number has been successfully Updated!", Toast.LENGTH_SHORT).show();
+                        FirebaseAuth.getInstance().signOut();
+                        i=0;
+                        Intent startSignIn=new Intent(getApplicationContext(),SignIn.class);
+                        startSignIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        AuthenticatePhoneNumber.this.finishAffinity();
+                        startActivity(startSignIn, ActivityOptions.makeSceneTransitionAnimation(AuthenticatePhoneNumber.this).toBundle());
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }
+                });
     }
 }

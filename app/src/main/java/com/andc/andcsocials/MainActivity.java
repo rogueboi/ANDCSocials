@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private String userID="";
     private static String dR="";
+    private boolean check=true;
     private DocumentReference documentReference;
     private TextView username;
     private Fragment fragment;
@@ -103,6 +104,14 @@ public class MainActivity extends AppCompatActivity {
                         .build());
         toolbar.getOverflowIcon().setTint(getColor(R.color.colorGradientStart));
 
+        fragment=new StudentHome();
+        Bundle bundle = new Bundle();
+        bundle.putString("Society Type",valueOf(check));
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame,fragment).commit();
+
         firebaseAuth=FirebaseAuth.getInstance();
         user=firebaseAuth.getCurrentUser();
         firestore=FirebaseFirestore.getInstance();
@@ -127,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 int id=item.getItemId();
                 switch (id) {
                     case R.id.profileMenuItem:
+                        loadFragment(new StudentProfile());
                         break;
                     case R.id.applicationStatusMenuItem:
                         break;
@@ -161,9 +171,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fragment=new StudentHome();
+                Bundle bundle = new Bundle();
+                bundle.putString("Society Type",valueOf(check));
+                fragment.setArguments(bundle);
                 FragmentManager fragmentManager=getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentManager.popBackStack();
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentTransaction.replace(R.id.frame,fragment).commit();
                 fragmentTransaction.addToBackStack(null);
             }
@@ -241,6 +254,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.switchMenuItem:
+                Bundle bundle = new Bundle();
+                check=!check;
+                bundle.putString("Society Type",valueOf(check));
+                StudentHome studentHome=new StudentHome();
+                studentHome.setArguments(bundle);
+                loadFragment(studentHome);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -249,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadFragment(Fragment f) {
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentManager.popBackStack(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fragmentTransaction.replace(R.id.frame,f).commit();
         drawerLayout.closeDrawer(GravityCompat.START);
         fragmentTransaction.addToBackStack(null);
