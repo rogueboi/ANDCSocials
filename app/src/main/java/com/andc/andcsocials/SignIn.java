@@ -109,7 +109,7 @@ public class SignIn extends AppCompatActivity {
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),society_dashboard.class));
+                startActivity(new Intent(getApplicationContext(),ssStudentSocietyView.class));
 
             }
         });
