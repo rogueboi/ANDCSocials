@@ -12,8 +12,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +25,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.shape.CornerFamily;
@@ -32,6 +38,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -49,9 +56,14 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseFirestore firestore;
     private String userID="";
+    private static String dR="";
+    private boolean check=true;
     private DocumentReference documentReference;
     private TextView username;
     private Fragment fragment;
+
+    Intent verifyPhoneNumberIntent, verifyEmailIntent;
+    public static int k=0;
 
     public interface ReadStudentName {
         void onResponse(String name);
@@ -92,6 +104,14 @@ public class MainActivity extends AppCompatActivity {
                         .build());
         toolbar.getOverflowIcon().setTint(getColor(R.color.colorGradientStart));
 
+        fragment=new StudentHome();
+        Bundle bundle = new Bundle();
+        bundle.putString("Society Type",valueOf(check));
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame,fragment).commit();
+
         firebaseAuth=FirebaseAuth.getInstance();
         user=firebaseAuth.getCurrentUser();
         firestore=FirebaseFirestore.getInstance();
@@ -101,12 +121,14 @@ public class MainActivity extends AppCompatActivity {
 
         userID=user.getUid();
 
-        readStudentName(new ReadStudentName() {
-            @Override
-            public void onResponse(String name) {
-                username.setText(name);
-            }
-        });
+        if (k==0) {
+            readStudentName(new ReadStudentName() {
+                @Override
+                public void onResponse(String name) {
+                    username.setText(name);
+                }
+            });
+        }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -114,18 +136,19 @@ public class MainActivity extends AppCompatActivity {
                 int id=item.getItemId();
                 switch (id) {
                     case R.id.profileMenuItem:
+                        loadFragment(new StudentProfile());
                         break;
                     case R.id.applicationStatusMenuItem:
                         break;
                     case R.id.verifyPhoneNumberMenuItem:
                         Intent verifyPhoneNumberIntent=new Intent(getApplicationContext(), AuthenticatePhoneNumber.class);
-                        verifyPhoneNumberIntent.putExtra("registrationType","Student");
+                        verifyPhoneNumberIntent.putExtra("documentReference", dR);
                         startActivity(verifyPhoneNumberIntent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         break;
                     case R.id.verifyEmailMenuItem:
                         Intent verifyEmailIntent=new Intent(getApplicationContext(), AuthenticateEmail.class);
-                        verifyEmailIntent.putExtra("registrationType","Student");
+                        verifyEmailIntent.putExtra("documentReference",dR);
                         startActivity(verifyEmailIntent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         break;
@@ -136,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.logoutMenuItem:
                         logOut();
                         break;
-                    case R.id.deleteMenuItem:
+                    case R.id.resetPasswordMenuItem:
                         break;
                 }
                 return true;
@@ -148,29 +171,76 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fragment=new StudentHome();
+                Bundle bundle = new Bundle();
+                bundle.putString("Society Type",valueOf(check));
+                fragment.setArguments(bundle);
                 FragmentManager fragmentManager=getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentManager.popBackStack();
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentTransaction.replace(R.id.frame,fragment).commit();
                 fragmentTransaction.addToBackStack(null);
             }
         });
-
-        Toast.makeText(this, username.getText().toString(), Toast.LENGTH_SHORT).show();
-
     }
 
     private void readStudentName(ReadStudentName readStudentName) {
-        documentReference=firestore.collection("Student")
-                .document(userID);
+        firestore.collectionGroup("StudentID")
+                .whereEqualTo("Email",user.getEmail()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                documentReference=document.getReference();
+                            }
+                        }
+                    }
+                });
 
-        documentReference.addSnapshotListener(MainActivity.this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value,
-                                @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                readStudentName.onResponse(value.getString("Full Name"));
-            }
-        });
+        ConnectivityManager connectivityManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getActiveNetworkInfo()!=null && k==0) {
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    int i=0;
+                    while (documentReference==null) {
+                        try {
+                            Thread.sleep(500);
+                            i++;
+                            if (i>10)
+                                return;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    documentReference.addSnapshotListener(MainActivity.this, new EventListener<DocumentSnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                            readStudentName.onResponse(value.getString("Name"));
+                        }
+                    });
+
+                    dR=documentReference.getPath();
+                    k++;
+                }
+            });
+            thread.start();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!dR.equals("") && k>0) {
+            documentReference=firestore.document(dR);
+            documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                    username.setText(value.getString("Name"));
+                }
+            });
+        }
     }
 
     @Override
@@ -184,6 +254,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.switchMenuItem:
+                Bundle bundle = new Bundle();
+                check=!check;
+                bundle.putString("Society Type",valueOf(check));
+                StudentHome studentHome=new StudentHome();
+                studentHome.setArguments(bundle);
+                loadFragment(studentHome);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -192,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadFragment(Fragment f) {
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentManager.popBackStack(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fragmentTransaction.replace(R.id.frame,f).commit();
         drawerLayout.closeDrawer(GravityCompat.START);
         fragmentTransaction.addToBackStack(null);
@@ -201,8 +278,14 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth.signOut();
         Intent startSignIn=new Intent(getApplicationContext(),SignIn.class);
         startSignIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        MainActivity.this.finish();
+        MainActivity.this.finishAffinity();
         startActivity(startSignIn, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        k=0;
     }
 }

@@ -6,25 +6,21 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -38,12 +34,10 @@ public class RegisterPassword extends AppCompatActivity {
     private TextView goToLogin;
     private TextInputLayout textField1, textField2;
     private EditText passwordRegister, confirmPasswordRegister;
-    private ExtendedFloatingActionButton nextAuthenticateEmail;
-    private String registrationType="", email="", password="", confirmPassword="", fullName="", course="", phoneNumber=" ", societyName="", societyType="", department="", userID="";
+    private ExtendedFloatingActionButton nextDashboard;
+    private String registrationType="", email="", password="", confirmPassword="", userID="";
 
     private FirebaseAuth firebaseAuth;
-    private FirebaseUser user;
-    private FirebaseFirestore firestore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,30 +52,15 @@ public class RegisterPassword extends AppCompatActivity {
         Intent RegisterInformationIntent=getIntent();
         registrationType =RegisterInformationIntent.getStringExtra("registrationType");
         email = RegisterInformationIntent.getStringExtra("email");
-        phoneNumber = RegisterInformationIntent.getStringExtra("phoneNumber");
-
-        if (registrationType.equals("Student")) {
-            fullName = RegisterInformationIntent.getStringExtra("fullName");
-            course = RegisterInformationIntent.getStringExtra("course");
-        }
-        else {
-            societyName=RegisterInformationIntent.getStringExtra("societyName");
-            societyType=RegisterInformationIntent.getStringExtra("societyType");
-            department=RegisterInformationIntent.getStringExtra("department");
-            if (department.equals("")) {
-                department="none";
-            }
-        }
 
         goToLogin=findViewById(R.id.goToLogin);
         textField1=findViewById(R.id.TextField1);
         passwordRegister=findViewById(R.id.passwordRegister);
         textField2=findViewById(R.id.TextField2);
         confirmPasswordRegister=findViewById(R.id.confirmPasswordRegister);
-        nextAuthenticateEmail= findViewById(R.id.nextAuthenicateEmail);
+        nextDashboard = findViewById(R.id.nextDashboard);
 
         firebaseAuth=FirebaseAuth.getInstance();
-        firestore=FirebaseFirestore.getInstance();
 
         goToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +71,7 @@ public class RegisterPassword extends AppCompatActivity {
             }
         });
 
-        nextAuthenticateEmail.setOnClickListener(new View.OnClickListener() {
+        nextDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 password=passwordRegister.getText().toString();
@@ -121,54 +100,20 @@ public class RegisterPassword extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull @org.jetbrains.annotations.NotNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    user=FirebaseAuth.getInstance().getCurrentUser();
-                                    userID= FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                    firestore=FirebaseFirestore.getInstance();
-                                    DocumentReference documentReference=firestore.collection(registrationType).document(userID);
-
-                                    Map<String, Object> mapRegistration = new HashMap<>();
-                                    mapRegistration.put("Email", email);
-                                    mapRegistration.put("Phone Number",phoneNumber);
-                                    mapRegistration.put("Is Email Verified?",false);
-                                    mapRegistration.put("Is Phone Number Verified?",false);
-
-                                    if (registrationType.equals("Society")) {
-                                        mapRegistration.put("Society Name",societyName);
-                                        mapRegistration.put("Society Type",societyType);
-                                        mapRegistration.put("Department",department);
-                                        mapRegistration.put("Official Account",false);
-                                        documentReference.set(mapRegistration)
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull @NotNull Exception e) {
-                                                        Toast.makeText(RegisterPassword.this, "Fail to add Society Information in the Society Information Database!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-                                        Toast.makeText(RegisterPassword.this, "Account Successfully Created!", Toast.LENGTH_SHORT).show();
-
-                                        Intent goToSocietyDashboard=new Intent(getApplicationContext(),society_dashboard.class);
-                                        goToSocietyDashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    Toast.makeText(RegisterPassword.this, "Account Created.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisterPassword.this, "Verify your Email & Phone No.!", Toast.LENGTH_SHORT).show();
+                                    if (registrationType.equals("Student")) {
+                                        Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
+                                        startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         RegisterPassword.this.finishAffinity();
-                                        startActivity(goToSocietyDashboard, ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
+                                        startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
                                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                     }
-                                    else if (registrationType.equals("Student")) {
-                                        mapRegistration.put("Full Name",fullName);
-                                        mapRegistration.put("Course",course);
-                                        mapRegistration.put("Student Coordinator of","none");
-                                        documentReference.set(mapRegistration)
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull @NotNull Exception e) {
-                                                        Toast.makeText(RegisterPassword.this, "Fail to add Student Information in the Database!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-                                        Toast.makeText(RegisterPassword.this, "Account Successfully Created!", Toast.LENGTH_SHORT).show();
-
-                                        Intent goToMainActivity=new Intent(getApplicationContext(),MainActivity.class);
-                                        goToMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    else {
+                                        Intent startSocietyDashboardActivity=new Intent(getApplicationContext(), society_dashboard.class);
+                                        startSocietyDashboardActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         RegisterPassword.this.finishAffinity();
-                                        startActivity(goToMainActivity, ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
+                                        startActivity(startSocietyDashboardActivity, ActivityOptions.makeSceneTransitionAnimation(RegisterPassword.this).toBundle());
                                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                     }
                                 }

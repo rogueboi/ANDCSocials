@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -51,39 +52,37 @@ public class SignIn extends AppCompatActivity {
 
         firebaseAuth=FirebaseAuth.getInstance();
         user=firebaseAuth.getCurrentUser();
-        if (user!=null) {
-            firebaseAuth.getCurrentUser().reload()
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            CollectionReference collectionReference= FirebaseFirestore.getInstance()
-                                    .collection("Society");
 
-                            collectionReference.whereEqualTo("Email",user.getEmail()).get()
-                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                                            List<String> list=new ArrayList<>();
-                                            for (DocumentSnapshot document : task.getResult()) {
-                                                String emails=document.getString("Email");
-                                                list.add(emails);
-                                            }
-                                            if (!list.isEmpty()) {
-                                                Intent startMainActivity = new Intent(getApplicationContext(), society_dashboard.class);
-                                                startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                SignIn.this.finishAffinity();
-                                                startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
-                                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                            }
-                                            else {
-                                                Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
-                                                startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                SignIn.this.finishAffinity();
-                                                startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
-                                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                            }
-                                        }
-                                    });
+        if (user!=null) {
+            FirebaseFirestore.getInstance()
+                    .collectionGroup("StudentID")
+                    .whereEqualTo("Email",user.getEmail()).get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                            List<String> list=new ArrayList<>();
+                            for (DocumentSnapshot document : task.getResult()) {
+                                String emails=document.getString("Email");
+                                list.add(emails);
+                            }
+                            if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                                Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
+                                startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                SignIn.this.finishAffinity();
+                                startActivity(startMainActivity, ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            }
+                            else if (task.isSuccessful() && task.getResult().isEmpty()) {
+                                Intent startSocietyDashboardActivity=new Intent(getApplicationContext(), society_dashboard.class);
+                                startSocietyDashboardActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                SignIn.this.finishAffinity();
+                                startActivity(startSocietyDashboardActivity, ActivityOptions.makeSceneTransitionAnimation(SignIn.this).toBundle());
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            }
+                            else {
+                                FirebaseAuth.getInstance().signOut();
+                                Toast.makeText(SignIn.this, "Fail to obtain user authentication details!\n"+task.getException(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
         }

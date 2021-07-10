@@ -109,20 +109,19 @@ public class LogIn extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            CollectionReference collectionReference= firestore.collection("Society");
-
-                            collectionReference.whereEqualTo("Email",email).get()
+                            firestore.collectionGroup("SocietyID")
+                                    .whereEqualTo("Email",email).get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                                            if (!task.getResult().isEmpty()) {
+                                            if (task.isSuccessful() && !task.getResult().isEmpty()) {
                                                 Intent startSocietyDashboardActivity=new Intent(getApplicationContext(), society_dashboard.class);
                                                 startSocietyDashboardActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 LogIn.this.finishAffinity();
                                                 startActivity(startSocietyDashboardActivity, ActivityOptions.makeSceneTransitionAnimation(LogIn.this).toBundle());
                                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                             }
-                                            else {
+                                            else if (task.isSuccessful() && task.getResult().isEmpty()) {
                                                 Intent startMainActivity=new Intent(getApplicationContext(), MainActivity.class);
                                                 startMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 LogIn.this.finishAffinity();
