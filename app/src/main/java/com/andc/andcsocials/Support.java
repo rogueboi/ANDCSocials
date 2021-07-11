@@ -47,7 +47,7 @@ public class Support extends AppCompatActivity {
         collegeContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "01126293224")));
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "01126293224")));
             }
         });
 
@@ -61,7 +61,7 @@ public class Support extends AppCompatActivity {
         contactRishi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "+916306064863")));
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "+916306064863")));
             }
         });
 
@@ -75,7 +75,7 @@ public class Support extends AppCompatActivity {
         contactAniket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "+918826868310")));
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "+918826868310")));
             }
         });
     }
