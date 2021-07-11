@@ -10,6 +10,7 @@
     <color name="white_translucent">#BFFFFFFF</color>
     <color name="dirty_white">#F2FCFD</color>
     <color name="red">#FF0000</color>
+    <color name="verified">#73E33E</color>
 
     <color name="transparent">#00000000</color>
     <color name="colorGradientStart">#556CD1</color>
@@ -22,6 +23,7 @@
     <color name="light_blue_900">#FF01579B</color>
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="light_blue_A600">#C3B4E4FA</color>
     <color name="black_overlay">#66000000</color>
 
     <!--color name="text_input_layout_stroke_color">

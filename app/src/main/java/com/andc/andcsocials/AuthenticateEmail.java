@@ -46,13 +46,12 @@ import java.util.concurrent.Future;
 public class AuthenticateEmail extends AppCompatActivity implements UpdateEmailDialog.UpdateEmailDialogListener {
 
     private ExtendedFloatingActionButton updateEmail, resendAuthenticateEmailLink, verifyEmail;
-    private TextView emailText, waitingText, verifyEmailMessage, helper1, helper2, helper3;
+    private TextView emailText, waitingText, verifyEmailMessage;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
     private FirebaseFirestore firestore;
 
-    DocumentSnapshot documentSnapshot;
-    private String userID, registrationType, societyType;
+    private String userID;
     private DocumentReference documentReference;
     protected static int i=0;
     long lastClickTimeForUpdateEmail;

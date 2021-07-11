@@ -6,7 +6,7 @@
     android:text="Hello"
     android:paddingHorizontal="15dp"
     android:paddingVertical="10dp"
-    android:textColor="@color/colorGradientCenter"
+    android:textColor="@color/light_blue_A200"
     android:textStyle="bold"
     android:textSize="15sp"
     android:fontFamily="@font/noto_sans"

@@ -82,6 +82,10 @@
         <item name="android:background">@drawable/rounded_layout_shape</item>
     </style>
 
+    <style name="Layout.RoundedCorners1" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:background">@drawable/rounded_layout_shape1</item>
+    </style>
+
     <!-- Text Input Layout Hint Text Style -->
     <style name="TextInputLayoutHintText">
         <item name="android:textColor">@color/white_translucent</item>

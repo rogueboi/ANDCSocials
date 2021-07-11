@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ActivityOptions;
 import android.content.Context;
@@ -26,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -33,6 +36,7 @@ import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.shape.MaterialShapeDrawable;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -44,29 +48,42 @@ import org.jetbrains.annotations.NotNull;
 
 import static java.lang.String.valueOf;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ResetPasswordDialog.ResetPasswordDialogListener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
     private NavigationView navigationView;
     private FloatingActionButton home;
+    private SwipeRefreshLayout refreshMainActivity;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
     private FirebaseFirestore firestore;
     private String userID="";
     private static String dR="";
-    private boolean check=true;
+    private boolean check=true, internetGone=false;
     private DocumentReference documentReference;
-    private TextView username;
+    private TextView username, noInternetMessage;
     private Fragment fragment;
-
-    Intent verifyPhoneNumberIntent, verifyEmailIntent;
     public static int k=0;
 
-    public interface ReadStudentName {
-        void onResponse(String name);
+    @Override
+    public void checkSignOutStatus(String newPassword) {
+        user.updatePassword(newPassword)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(MainActivity.this, "Password successfully reset!", Toast.LENGTH_SHORT).show();
+                        logOut();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        Toast.makeText(MainActivity.this, "Fail to reset password!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
@@ -99,10 +116,36 @@ public class MainActivity extends AppCompatActivity {
         navViewBackground.setShapeAppearanceModel(
                 navViewBackground.getShapeAppearanceModel()
                         .toBuilder()
-                        .setTopRightCorner(CornerFamily.ROUNDED,30)
                         .setBottomRightCorner(CornerFamily.ROUNDED,30)
                         .build());
         toolbar.getOverflowIcon().setTint(getColor(R.color.colorGradientStart));
+
+        refreshMainActivity=findViewById(R.id.refreshMainActivity);
+        noInternetMessage=findViewById(R.id.noInternetMessage);
+        ConnectivityManager connectivityManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getActiveNetworkInfo()==null) {
+            internetGone=true;
+            noInternetMessage.setVisibility(View.VISIBLE);
+        }
+        refreshMainActivity.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (connectivityManager.getActiveNetworkInfo()==null) {
+                    noInternetMessage.setVisibility(View.VISIBLE);
+                    internetGone=true;
+                }
+                else {
+                    noInternetMessage.setVisibility(View.GONE);
+                    if (internetGone) {
+                        internetGone=false;
+                        finish();
+                        startActivity(getIntent(),ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }
+                }
+                refreshMainActivity.setRefreshing(false);
+            }
+        });
 
         fragment=new StudentHome();
         Bundle bundle = new Bundle();
@@ -122,35 +165,41 @@ public class MainActivity extends AppCompatActivity {
         userID=user.getUid();
 
         if (k==0) {
-            readStudentName(new ReadStudentName() {
-                @Override
-                public void onResponse(String name) {
-                    username.setText(name);
-                }
-            });
+            getDocumentReference();
         }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 int id=item.getItemId();
+                item.setChecked(true);
                 switch (id) {
                     case R.id.profileMenuItem:
-                        loadFragment(new StudentProfile());
+                        if (!dR.isEmpty()) {
+                            fragment = new StudentProfile();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("Document Reference", dR);
+                            fragment.setArguments(bundle);
+                            loadFragment(fragment);
+                        }
                         break;
                     case R.id.applicationStatusMenuItem:
                         break;
                     case R.id.verifyPhoneNumberMenuItem:
-                        Intent verifyPhoneNumberIntent=new Intent(getApplicationContext(), AuthenticatePhoneNumber.class);
-                        verifyPhoneNumberIntent.putExtra("documentReference", dR);
-                        startActivity(verifyPhoneNumberIntent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        if (!dR.isEmpty()) {
+                            Intent verifyPhoneNumberIntent = new Intent(getApplicationContext(), AuthenticatePhoneNumber.class);
+                            verifyPhoneNumberIntent.putExtra("documentReference", dR);
+                            startActivity(verifyPhoneNumberIntent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        }
                         break;
                     case R.id.verifyEmailMenuItem:
-                        Intent verifyEmailIntent=new Intent(getApplicationContext(), AuthenticateEmail.class);
-                        verifyEmailIntent.putExtra("documentReference",dR);
-                        startActivity(verifyEmailIntent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        if (!dR.isEmpty()) {
+                            Intent verifyEmailIntent = new Intent(getApplicationContext(), AuthenticateEmail.class);
+                            verifyEmailIntent.putExtra("documentReference", dR);
+                            startActivity(verifyEmailIntent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        }
                         break;
                     case R.id.settingsMenuItem:
                         break;
@@ -160,6 +209,8 @@ public class MainActivity extends AppCompatActivity {
                         logOut();
                         break;
                     case R.id.resetPasswordMenuItem:
+                        ResetPasswordDialog resetPasswordDialog=new ResetPasswordDialog();
+                        resetPasswordDialog.show(getSupportFragmentManager(),"Reset Password Dialog");
                         break;
                 }
                 return true;
@@ -170,6 +221,9 @@ public class MainActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (navigationView.getCheckedItem()!=null) {
+                    navigationView.getCheckedItem().setChecked(false);
+                }
                 fragment=new StudentHome();
                 Bundle bundle = new Bundle();
                 bundle.putString("Society Type",valueOf(check));
@@ -183,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void readStudentName(ReadStudentName readStudentName) {
+    private void getDocumentReference() {
         firestore.collectionGroup("StudentID")
                 .whereEqualTo("Email",user.getEmail()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -192,6 +246,12 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful() && !task.getResult().isEmpty()) {
                             for (DocumentSnapshot document : task.getResult()) {
                                 documentReference=document.getReference();
+                                String name=document.getString("Name");
+                                if (user.getDisplayName().isEmpty()) {
+                                    UserProfileChangeRequest request=new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(name).build();
+                                    user.updateProfile(request);
+                                }
                             }
                         }
                     }
@@ -217,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
                     documentReference.addSnapshotListener(MainActivity.this, new EventListener<DocumentSnapshot>() {
                         @Override
                         public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                            readStudentName.onResponse(value.getString("Name"));
+                            username.setText(value.getString("Name"));
                         }
                     });
 

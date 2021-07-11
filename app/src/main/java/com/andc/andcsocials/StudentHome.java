@@ -88,11 +88,11 @@ public class StudentHome extends Fragment {
                 int i = 0;
                 List<SocietyInformation> list=new ArrayList<>();
                 for (DocumentSnapshot documentSnapshot : value) {
-                    String Description=documentSnapshot.getString("Description")
-                            +"\n\nTeacher Coordinator: "+documentSnapshot.getString("Teacher Coordinator")
-                            +"\nStudent Coordinator: "+documentSnapshot.getString("Student Coordinator")
-                            +"\nContact: +"+documentSnapshot.get("Phone Number");
-                    list.add(new SocietyInformation(societyLogo[i++],documentSnapshot.getString("Name"),Description));
+                    list.add(new SocietyInformation(societyLogo[i++],
+                            documentSnapshot.getString("Name"),
+                            documentSnapshot.getString("Description"),
+                            documentSnapshot.getString("Student Coordinator"),
+                            "+"+documentSnapshot.get("Phone Number")));
                 }
                 adapter=new SocietyInformationAdapter(list);
                 societyInformation.setClipToPadding(false);

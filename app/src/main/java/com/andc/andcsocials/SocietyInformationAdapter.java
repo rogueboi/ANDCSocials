@@ -44,18 +44,22 @@ public class SocietyInformationAdapter extends RecyclerView.Adapter<SocietyInfor
 
         ImageView societyImage;
         TextView societyName;
-        TextView description;
+        TextView description, studentCoordinatorName, societyContactInformation;
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             societyImage=itemView.findViewById(R.id.societyImage);
             societyName=itemView.findViewById(R.id.societyName);
             description=itemView.findViewById(R.id.description);
+            studentCoordinatorName=itemView.findViewById(R.id.studentCordinatorName);
+            societyContactInformation=itemView.findViewById(R.id.societyContactInformation);
         }
 
         public void setValues(SocietyInformation societyInformation) {
             societyImage.setImageResource(societyInformation.societyImageID);
             societyName.setText(societyInformation.societyName);
             description.setText(societyInformation.description);
+            studentCoordinatorName.setText(societyInformation.studentCoordinatorName);
+            societyContactInformation.setText(societyInformation.societyContactInformation);
         }
     }
 }

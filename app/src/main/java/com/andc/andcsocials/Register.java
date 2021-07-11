@@ -134,7 +134,7 @@ public class Register extends AppCompatActivity {
                                         Toast.makeText(Register.this, "Email is already Registered!", Toast.LENGTH_SHORT).show();
                                     }
                                     else {
-                                        if (selectRegisterType.equals("Society")) {
+                                        if (RegistrationType.equals("Society")) {
                                             FirebaseFirestore.getInstance().collectionGroup("SocietyID")
                                                     .whereEqualTo("Email",email).get()
                                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

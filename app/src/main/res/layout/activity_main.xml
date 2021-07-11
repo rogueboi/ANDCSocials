@@ -9,12 +9,6 @@
     tools:context=".MainActivity"
     android:id="@+id/drawerLayout">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/helper"
-        android:visibility="gone"/>
-
     <include
         android:id="@+id/includedAppbar"
         android:layout_width="match_parent"
@@ -25,7 +19,6 @@
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:paddingTop="6dp"
         android:id="@+id/nav_view"
         android:background="@color/dirty_white"
         android:layout_gravity="start"
