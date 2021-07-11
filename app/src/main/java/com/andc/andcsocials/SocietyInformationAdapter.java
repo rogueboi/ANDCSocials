@@ -27,7 +27,6 @@ public class SocietyInformationAdapter extends RecyclerView.Adapter<SocietyInfor
     public SocietyInformationAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         return new ViewHolder( LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cardview_item,parent,false));
-
     }
 
     @Override

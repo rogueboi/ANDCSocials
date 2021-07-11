@@ -172,7 +172,6 @@ public class MainActivity extends AppCompatActivity implements ResetPasswordDial
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 int id=item.getItemId();
-                item.setChecked(true);
                 switch (id) {
                     case R.id.profileMenuItem:
                         if (!dR.isEmpty()) {
@@ -204,6 +203,8 @@ public class MainActivity extends AppCompatActivity implements ResetPasswordDial
                     case R.id.settingsMenuItem:
                         break;
                     case R.id.supportMenuItem:
+                        startActivity(new Intent(getApplicationContext(),Support.class),ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         break;
                     case R.id.logoutMenuItem:
                         logOut();
@@ -223,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements ResetPasswordDial
             public void onClick(View v) {
                 if (navigationView.getCheckedItem()!=null) {
                     navigationView.getCheckedItem().setChecked(false);
+                    navigationView.getCheckedItem().setEnabled(true);
                 }
                 fragment=new StudentHome();
                 Bundle bundle = new Bundle();
@@ -247,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements ResetPasswordDial
                             for (DocumentSnapshot document : task.getResult()) {
                                 documentReference=document.getReference();
                                 String name=document.getString("Name");
-                                if (user.getDisplayName().isEmpty()) {
+                                if (user.getDisplayName()==null) {
                                     UserProfileChangeRequest request=new UserProfileChangeRequest.Builder()
                                             .setDisplayName(name).build();
                                     user.updateProfile(request);

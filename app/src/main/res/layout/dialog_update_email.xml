@@ -36,7 +36,7 @@
             android:id="@+id/updateEmailDialogLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/gradient_center"
+            android:background="@drawable/profile_header_background"
             android:padding="15dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -110,7 +110,7 @@
                     app:helperTextTextColor="@color/white"
                     app:hintEnabled="false"
                     app:startIconDrawable="@drawable/email"
-                    app:startIconTint="@color/white">
+                    app:startIconTint="@color/white_translucent">
 
                     <!--this is the actual edit text which takes the input-->
                     <com.google.android.material.textfield.TextInputEditText

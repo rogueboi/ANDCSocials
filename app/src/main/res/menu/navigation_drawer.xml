@@ -23,8 +23,7 @@
             android:icon="@drawable/email"/>
     </group>
 
-    <group android:id="@+id/subGroup_settingsAndSupport"
-        android:checkableBehavior="single">
+    <group android:id="@+id/subGroup_settingsAndSupport">
         <item
             android:title="Settings"
             android:icon="@drawable/settings"

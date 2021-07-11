@@ -38,6 +38,7 @@ public class ForgetPassword extends AppCompatActivity {
 
         ConstraintLayout logInLayout = findViewById(R.id.forgetPasswordLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
+        animationDrawable.setAlpha(215);
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(3500);
         animationDrawable.start();

@@ -10,6 +10,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class RegisterPassword extends AppCompatActivity {
     private TextView goToLogin;
     private TextInputLayout textField1, textField2;
     private EditText passwordRegister, confirmPasswordRegister;
+    private ProgressBar progressBar;
     private ExtendedFloatingActionButton nextDashboard;
     private String registrationType="", email="", password="", confirmPassword="", userID="";
 
@@ -46,6 +48,7 @@ public class RegisterPassword extends AppCompatActivity {
 
         ConstraintLayout logInLayout = findViewById(R.id.registerPasswordLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)logInLayout.getBackground();
+        animationDrawable.setAlpha(215);
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(3500);
         animationDrawable.start();
@@ -60,6 +63,7 @@ public class RegisterPassword extends AppCompatActivity {
         textField2=findViewById(R.id.TextField2);
         confirmPasswordRegister=findViewById(R.id.confirmPasswordRegister);
         nextDashboard = findViewById(R.id.nextDashboard);
+        progressBar=findViewById(R.id.progressBar);
 
         firebaseAuth=FirebaseAuth.getInstance();
 
@@ -96,6 +100,7 @@ public class RegisterPassword extends AppCompatActivity {
                     textField2.setError(null);
                 }
 
+                progressBar.setVisibility(View.VISIBLE);
                 firebaseAuth.createUserWithEmailAndPassword(email,password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -120,6 +125,7 @@ public class RegisterPassword extends AppCompatActivity {
                                 }
                                 else {
                                     Toast.makeText(RegisterPassword.this, "Error Occurred!!\n"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    progressBar.setVisibility(View.GONE);
                                 }
                             }
                         });

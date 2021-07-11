@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/andc_logo_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ANDCSocials">
-        <activity android:name=".ssStudentSocietyView"></activity>
+        <activity android:name=".Support"></activity>
+        <activity android:name=".ssStudentSocietyView" />
         <activity
             android:name=".SignIn"
             android:theme="@style/splashScreenTheme">

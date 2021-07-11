@@ -63,6 +63,7 @@ public class AuthenticateEmail extends AppCompatActivity implements UpdateEmailD
 
         ConstraintLayout signInLayout = findViewById(R.id.authenticateEmailLayout);
         AnimationDrawable animationDrawable = (AnimationDrawable)signInLayout.getBackground();
+        animationDrawable.setAlpha(215);
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(3500);
         animationDrawable.start();

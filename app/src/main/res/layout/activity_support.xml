@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fragment_background"
+    tools:context=".Support">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="25dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePictureNavigationBar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/andc_logo" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="Socials"
+                android:textColor="@color/light_blue_600"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:shadowColor="@color/light_blue_A200"
+                android:shadowDx="0.0"
+                android:shadowDy="0.0"
+                android:shadowRadius="12" />
+
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="8dp"
+                    android:elevation="5dp"
+                    android:layout_marginHorizontal="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/textview_background"
+                            android:paddingStart="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="College Information"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/raleway_semibold"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="10dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:orientation="vertical"
+                                    android:background="@drawable/rounded_layout_shape1">
+
+                                    <LinearLayout
+                                        android:id="@+id/redirectCollegeWebsite"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:orientation="horizontal">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:gravity="center"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:text="Acharya Narendra Dev College"
+                                                android:gravity="center"
+                                                android:fontFamily="@font/aladin"
+                                                android:textSize="21sp"
+                                                android:textStyle="bold"
+                                                android:textColor="@color/light_blue_900"/>
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:text="UNIVERSITY OF DELHI"
+                                                android:padding="2dp"
+                                                android:gravity="center"
+                                                android:fontFamily="@font/raleway_semibold"
+                                                android:textSize="15sp"
+                                                android:textStyle="bold" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:text="Govindpuri, Kalkaji, New Delhi 110019"
+                                                android:gravity="center"
+                                                android:textStyle="bold"/>
+
+
+                                        </LinearLayout>
+
+                                        <de.hdodenhof.circleimageview.CircleImageView
+                                            android:layout_width="180dp"
+                                            android:layout_height="100dp"
+                                            android:layout_marginVertical="10dp"
+                                            android:layout_marginRight="5dp"
+                                            android:layout_weight="1"
+                                            android:src="@drawable/andc_logo"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:gravity="center"
+                                        android:layout_marginTop="10dp">
+
+                                        <de.hdodenhof.circleimageview.CircleImageView
+                                            android:layout_width="180dp"
+                                            android:layout_height="100dp"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_weight="1"
+                                            android:src="@drawable/principal"/>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:layout_marginHorizontal="20dp"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:text="Acting Principal"
+                                                android:fontFamily="@font/raleway_semibold"
+                                                android:textSize="18sp"
+                                                android:textStyle="bold"/>
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:text="Dr. Ravi Toteja"
+                                                android:fontFamily="@font/aladin"
+                                                android:textSize="21sp"
+                                                android:textStyle="bold"
+                                                android:textColor="@color/light_blue_600"
+                                                android:layout_marginBottom="5dp"/>
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:text="Contact:"
+                                                android:fontFamily="@font/raleway_semibold"
+                                                android:textSize="15sp"
+                                                android:textStyle="bold"/>
+
+                                            <TextView
+                                                android:id="@+id/principalEmail"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:drawableLeft="@drawable/email"
+                                                android:drawablePadding="5dp"
+                                                android:drawableTint="@color/light_blue_600"
+                                                android:padding="2dp"
+                                                android:text="principal@andc.du.ac.in"
+                                                android:fontFamily="@font/aladin"
+                                                android:textSize="18sp"
+                                                android:textColor="@color/light_blue_600"/>
+
+                                            <TextView
+                                                android:id="@+id/collegeContact"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:drawableLeft="@drawable/phone"
+                                                android:drawablePadding="5dp"
+                                                android:drawableTint="@color/light_blue_600"
+                                                android:text="011-26293224"
+                                                android:fontFamily="@font/aladin"
+                                                android:textSize="18sp"
+                                                android:textColor="@color/light_blue_600"/>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="8dp"
+                    android:elevation="5dp"
+                    android:layout_marginHorizontal="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/textview_background"
+                            android:paddingStart="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="Connect with Developers"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/raleway_semibold"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="10dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:orientation="vertical"
+                                    android:background="@drawable/rounded_layout_shape1">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:gravity="center"
+                                        android:layout_marginTop="10dp">
+
+                                        <de.hdodenhof.circleimageview.CircleImageView
+                                            android:layout_width="180dp"
+                                            android:layout_height="100dp"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_weight="1"
+                                            android:src="@drawable/rishi_sarbobhoum"/>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:layout_marginHorizontal="20dp"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:text="Rishi Sarbobhoum"
+                                                android:gravity="center"
+                                                android:fontFamily="@font/aladin"
+                                                android:textSize="21sp"
+                                                android:textStyle="bold"
+                                                android:textColor="@color/light_blue_600"
+                                                android:layout_marginBottom="5dp"/>
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:text="Contact:"
+                                                android:fontFamily="@font/raleway_semibold"
+                                                android:textSize="15sp"
+                                                android:textStyle="bold"/>
+
+                                            <TextView
+                                                android:id="@+id/instagramRishi"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:drawableLeft="@drawable/instagram_icon"
+                                                android:drawablePadding="5dp"
+                                                android:padding="2dp"
+                                                android:text="bond_ionicbond"
+                                                android:fontFamily="@font/aladin"
+                                                android:textSize="18sp"
+                                                android:textColor="@color/light_blue_600"/>
+
+                                            <TextView
+
+                                                android:id="@+id/contactRishi"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:drawableLeft="@drawable/phone"
+                                                android:drawablePadding="5dp"
+                                                android:drawableTint="@color/light_blue_600"
+                                                android:text="+91 6306064863"
+                                                android:fontFamily="@font/aladin"
+                                                android:textSize="18sp"
+                                                android:textColor="@color/light_blue_600"/>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                app:cardCornerRadius="10dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:orientation="vertical"
+                                    android:background="@drawable/rounded_layout_shape1">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:gravity="center"
+                                        android:layout_marginTop="10dp">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:layout_marginHorizontal="20dp"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:text="Aniket Roy"
+                                                android:gravity="center"
+                                                android:fontFamily="@font/aladin"
+                                                android:textSize="21sp"
+                                                android:textStyle="bold"
+                                                android:textColor="@color/light_blue_600"
+                                                android:layout_marginBottom="5dp"/>
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:text="Contact:"
+                                                android:fontFamily="@font/raleway_semibold"
+                                                android:textSize="15sp"
+                                                android:textStyle="bold"/>
+
+                                            <TextView
+                                                android:id="@+id/instagramAniket"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:drawableLeft="@drawable/instagram_icon"
+                                                android:drawablePadding="5dp"
+                                                android:padding="2dp"
+                                                android:text="aniketroy__"
+                                                android:fontFamily="@font/aladin"
+                                                android:textSize="18sp"
+                                                android:textColor="@color/light_blue_600"/>
+
+                                            <TextView
+                                                android:id="@+id/contactAniket"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:drawableLeft="@drawable/phone"
+                                                android:drawablePadding="5dp"
+                                                android:drawableTint="@color/light_blue_600"
+                                                android:text="+91 8826868310"
+                                                android:fontFamily="@font/aladin"
+                                                android:textSize="18sp"
+                                                android:textColor="@color/light_blue_600"/>
+
+                                        </LinearLayout>
+
+                                        <de.hdodenhof.circleimageview.CircleImageView
+                                            android:layout_width="180dp"
+                                            android:layout_height="100dp"
+                                            android:layout_marginRight="10dp"
+                                            android:layout_weight="1"
+                                            android:src="@drawable/aniket_roy"/>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

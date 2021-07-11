@@ -13,9 +13,14 @@
     <color name="verified">#73E33E</color>
 
     <color name="transparent">#00000000</color>
-    <color name="colorGradientStart">#556CD1</color>
-    <color name="colorGradientCenter">#815ba5</color>
-    <color name="colorGradientEnd">#fe8dd3</color>
+    <color name="colorGradientStart">#FF556CD1</color>
+    <color name="colorGradientCenter">#FF815BA5</color>
+    <color name="colorGradientEnd">#FFFE8DD3</color>
+
+    <color name="colorAnimationStart">#C2556CD1</color>
+    <color name="colorAnimationCenter">#C2815BA5</color>
+    <color name="colorAnimationEnd">#C2FE8DD3</color>
+    <color name="purple_Animation">#C2BB86FC</color>
 
     <color name="navBarUsername">#2E3C79</color>
     <color name="disabled">#808080</color>

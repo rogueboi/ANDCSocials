@@ -63,6 +63,9 @@ public class StudentProfile extends Fragment {
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        NavigationView navigationView=(NavigationView)getActivity().findViewById(R.id.nav_view);
+        navigationView.getCheckedItem().setChecked(true);
+        navigationView.getCheckedItem().setEnabled(false);
     }
 
     @Override
@@ -84,7 +87,6 @@ public class StudentProfile extends Fragment {
         user=firebaseAuth.getCurrentUser();
         firestore=FirebaseFirestore.getInstance();
 
-        studentName.setText(user.getDisplayName());
         if (user.getPhotoUrl()!=null) {
             Glide.with(getContext()).load(user.getPhotoUrl())
                     .into(studentProfilePicture);
@@ -95,6 +97,7 @@ public class StudentProfile extends Fragment {
         documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                studentName.setText(value.getString("Name"));
                 studentEmail.setText(value.getString("Email"));
                 studentCourse.setText(value.getString("Course"));
                 studentYearOfAdmission.setText(value.get("Year of Admission").toString());
@@ -203,5 +206,6 @@ public class StudentProfile extends Fragment {
         super.onDestroy();
         NavigationView navigationView=(NavigationView)getActivity().findViewById(R.id.nav_view);
         navigationView.getCheckedItem().setChecked(false);
+        navigationView.getCheckedItem().setEnabled(true);
     }
 }
