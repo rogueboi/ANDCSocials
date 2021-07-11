@@ -1,16 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".info_links_society_Dashboard">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="All the links and information will be provided here"
-        android:gravity="center"
-        android:background="@color/colorGradientStart"/>
+        android:orientation="vertical">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8sp"
+            android:padding="16dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:background="@drawable/insta_gradient">
+
+                <ImageView
+                    android:id="@+id/instaLogo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/instagram_logo"
+                    android:foregroundGravity="center_vertical"
+
+                    />
+
+                <TextView
+                    android:id="@+id/instatag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/instaLogo"
+                    android:layout_alignBottom="@+id/instaLogo"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="13dp"
+                    android:layout_toEndOf="@+id/instaLogo"
+                    android:layout_toRightOf="@+id/instaLogo"
+                    android:fontFamily="@font/montserrat"
+                    android:maxLines="1"
+                    android:gravity="center_vertical"
+                    android:text="\@instahandle"
+                    android:textColor="@color/white_translucent"
+                    android:textSize="22sp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8sp"
+            android:padding="16dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:background="@drawable/gmail_gradient">
+
+                <ImageView
+                    android:id="@+id/gmailLogo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/gmail_logo"
+                    android:foregroundGravity="center_vertical"
+
+                    />
+
+                <TextView
+                    android:id="@+id/gmailtag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/gmailLogo"
+                    android:layout_alignBottom="@+id/gmailLogo"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="13dp"
+                    android:layout_toEndOf="@+id/gmailLogo"
+                    android:layout_toRightOf="@+id/gmailLogo"
+                    android:fontFamily="@font/montserrat"
+                    android:gravity="center_vertical"
+                    android:text="\societymail@gamail.com"
+                    android:maxLines="1"
+                    android:textColor="@color/white_translucent"
+                    android:textSize="22sp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
 </FrameLayout>

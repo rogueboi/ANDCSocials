@@ -1,5 +1,6 @@
 package com.andc.andcsocials;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,12 +51,21 @@ public class StudentHome extends Fragment {
     private TextView societyType;
     SocietyInformationAdapter adapter;
 
+
     public StudentHome() { }
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
+
+
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +76,9 @@ public class StudentHome extends Fragment {
         check=Boolean.parseBoolean(getArguments().getString("Society Type"));
         societyType=view.findViewById(R.id.societyType);
         firestore=FirebaseFirestore.getInstance();
+
+
+
 
         if (check) {
             collectionReference=firestore.collection("Society").document("Co-curricular")
@@ -113,6 +127,10 @@ public class StudentHome extends Fragment {
                 societyInformation.setPageTransformer(transformer);
             }
         });
+
+
+
+
         return view;
     }
 }
