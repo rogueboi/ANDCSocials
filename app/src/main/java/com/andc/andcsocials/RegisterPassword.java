@@ -7,7 +7,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -102,10 +101,6 @@ public class RegisterPassword extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull @org.jetbrains.annotations.NotNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    FirebaseUser user=firebaseAuth.getCurrentUser();
-                                    UserProfileChangeRequest request=new UserProfileChangeRequest.Builder()
-                                            .setPhotoUri(Uri.parse("android.resource://com.andc.andcsocials/drawable/blank_profile_picture")).build();
-                                    user.updateProfile(request);
                                     Toast.makeText(RegisterPassword.this, "Account Created.", Toast.LENGTH_SHORT).show();
                                     Toast.makeText(RegisterPassword.this, "Verify your Email & Phone No.!", Toast.LENGTH_SHORT).show();
                                     if (registrationType.equals("Student")) {

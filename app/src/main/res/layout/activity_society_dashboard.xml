@@ -4,11 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".society_dashboard"
-
-
-    >
-
+    tools:context=".society_dashboard">
 
     <ImageView
         android:id="@+id/logoSociety_dashboard"
