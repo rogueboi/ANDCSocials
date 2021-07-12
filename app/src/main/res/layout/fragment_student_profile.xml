@@ -30,7 +30,7 @@
                     android:id="@+id/relativeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:background="@drawable/profile_header_background"
+                    android:background="@drawable/header_bg_image"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
