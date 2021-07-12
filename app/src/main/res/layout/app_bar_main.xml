@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_image"
+    android:background="@drawable/bgimage2"
     >
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
