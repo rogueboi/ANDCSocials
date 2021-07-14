@@ -94,7 +94,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:layout_columnWeight="1"
@@ -103,9 +103,10 @@
             tools:layout_editor_absoluteY="471dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="@color/purple_200"
                 android:orientation="vertical"
                 app:layout_gravity="center">
 
@@ -113,11 +114,14 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/edit_profile_picture" />
+                    android:layout_margin="8dp"
+                    android:src="@drawable/Createpost" />
 
                 <TextView
                     android:layout_width="wrap_content"
+                    android:layout_margin="8dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="Create Post" />
 
 
@@ -128,7 +132,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:layout_columnWeight="1"
@@ -137,9 +141,10 @@
             tools:layout_editor_absoluteY="471dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="@color/purple_200"
                 android:orientation="vertical"
                 app:layout_gravity="center">
 
@@ -147,11 +152,14 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/edit_profile_picture" />
+                    android:layout_margin="8dp"
+                    android:src="@drawable/photo_library" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="center"
                     android:text="Timeline" />
 
 
@@ -161,7 +169,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:layout_columnWeight="1"
@@ -170,9 +178,10 @@
             tools:layout_editor_absoluteY="471dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="@color/purple_200"
                 android:orientation="vertical"
                 app:layout_gravity="center">
 
@@ -180,12 +189,15 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/edit_profile_picture" />
+                    android:src="@drawable/profile2"
+                    android:layout_margin="8dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Members / Coordinators" />
+                    android:layout_margin="8dp"
+                    android:layout_gravity="center"
+                    android:text="Profile" />
 
 
             </LinearLayout>
@@ -194,31 +206,36 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1"
             tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="471dp">
+            tools:layout_editor_absoluteY="471dp"
+            android:background="@color/teal_200">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
                 android:orientation="vertical"
-                app:layout_gravity="center">
+                app:layout_gravity="center"
+                android:background="@color/teal_200">
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/edit_profile_picture" />
+                    android:src="@drawable/society"
+                    android:layout_margin="8dp"/>
 
                 <TextView
+                    android:layout_margin="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Links and Information" />
+                    android:text="Members / Coordinators"
+                    android:layout_gravity="center"/>
 
 
             </LinearLayout>
@@ -230,7 +247,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
 
@@ -242,22 +259,27 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
             android:orientation="vertical"
-            app:layout_gravity="center">
+            app:layout_gravity="center"
+            android:background="@color/colorAnimationEnd">
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:src="@drawable/edit_profile_picture" />
+                android:layout_margin="8dp"
+                android:src="@drawable/application_status" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Review Pending Applicants" />
+                android:layout_margin="8dp"
+                android:layout_gravity="center"
+                android:text="Review Applicants" />
 
 
         </LinearLayout>
