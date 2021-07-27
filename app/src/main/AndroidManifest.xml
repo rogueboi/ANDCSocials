@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/andc_logo_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ANDCSocials">
-        <activity android:name=".CreatePostScreen"></activity>
+        <activity android:name=".soceity_dashboard_edit"></activity>
+        <activity android:name=".society_members_coordinatiors" />
+        <activity android:name=".society_profile" />
+        <activity android:name=".CreatePostScreen" />
         <activity android:name=".Support" />
         <activity android:name=".ssStudentSocietyView" />
         <activity

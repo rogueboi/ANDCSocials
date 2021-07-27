@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -20,7 +21,7 @@
         app:srcCompat="@drawable/andc_logo" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/presidentName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="President Name"
@@ -86,7 +87,7 @@
         app:columnCount="2"
         app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/presidentName"
         app:layout_constraintVertical_bias="0.038"
         app:rowCount="2"
         tools:layout_editor_absoluteX="0dp">
@@ -103,6 +104,7 @@
             tools:layout_editor_absoluteY="471dp">
 
             <LinearLayout
+                android:id="@+id/createPost"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
@@ -141,6 +143,7 @@
             tools:layout_editor_absoluteY="471dp">
 
             <LinearLayout
+                android:id="@+id/timeline"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
@@ -178,6 +181,7 @@
             tools:layout_editor_absoluteY="471dp">
 
             <LinearLayout
+                android:id="@+id/societyProfile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
@@ -216,6 +220,7 @@
             android:background="@color/teal_200">
 
             <LinearLayout
+                android:id="@+id/membersCoordinators"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
@@ -259,7 +264,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-
+            android:id="@+id/reviewApplicants"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
